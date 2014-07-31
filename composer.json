@@ -11,6 +11,7 @@
         "CAML"
     ],
     "homepage": "https://github.com/dcarbone/camel",
+    "license": "GPLv2",
 
     "authors" : [
         {
