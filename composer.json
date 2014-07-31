@@ -3,6 +3,15 @@
     "description" : "A library designed to help facilitate SharePoint CAML query construction",
     "type" : "library",
 
+    "keywords": [
+        "php",
+        "sharepoint",
+        "SharePoint",
+        "caml",
+        "CAML"
+    ],
+    "homepage": "https://github.com/dcarbone/camel",
+
     "authors" : [
         {
             "name" : "Daniel Carbone",
