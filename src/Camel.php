@@ -63,22 +63,18 @@ class Camel extends AbstractCollectionPlus
      */
     public function removeHump($hump)
     {
-        if ($hump instanceof Hump)
+        foreach($this as $h)
         {
-            $this->removeElement($hump);
-        }
-        else if (is_string($hump))
-        {
-            foreach($this as $i=>$h)
+            /** @var \DCarbone\Camel\Parts\IHump $h */
+            if ($h->getType() === $hump)
             {
-                /** @var \DCarbone\Camel\Parts\IHump $h */
-                if ($h->getType() === $hump)
-                {
-                    unset($this[$i]);
-                    break;
-                }
+                $hump = $h;
+                break;
             }
         }
+
+        if ($hump instanceof Hump)
+            $this->removeElement($hump);
 
         return $this;
     }
