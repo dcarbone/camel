@@ -66,31 +66,31 @@ class HumpTest extends PHPUnit_Framework_TestCase
     public function testCanAppendSubHump(Hump $hump)
     {
         $subHump = new Hump('query', '', array(), true);
-        $hump->addSubHump($hump);
+        $hump->addSubHump($subHump);
         $this->assertEquals(1, count($hump));
 
-        return array($hump, 'query', $subHump);
+        return array($hump, $subHump);
     }
 
     /**
      * @covers \DCarbone\Camel\Parts\Hump::removeSubHump
      * @depends testCanAppendSubHump
-     * @param array $hump
+     * @param array $humps
      */
-    public function testCanRemoveSubHumpViaSubHumpTypeString(array $hump)
+    public function testCanRemoveSubHumpViaSubHumpTypeString(array $humps)
     {
-        $hump[0]->removeSubHump('query');
-        $this->assertEquals(0, count($hump[0]));
+        $humps[0]->removeSubHump($humps[1]->getType());
+        $this->assertEquals(0, count($humps[0]));
     }
 
     /**
      * @covers \DCarbone\Camel\Parts\Hump::removeSubHump
      * @depends testCanAppendSubHump
-     * @param array $hump
+     * @param array $humps
      */
-    public function testCanRemoveSubHumpViaSubHumpObject(array $hump)
+    public function testCanRemoveSubHumpViaSubHumpObject(array $humps)
     {
-        $hump[0]->removeSubHump($hump[2]);
-        $this->assertEquals(0, count($hump[0]));
+        $humps[0]->removeSubHump($humps[1]);
+        $this->assertEquals(0, count($humps[0]));
     }
 }
