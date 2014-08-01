@@ -77,11 +77,12 @@ class HumpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers \DCarbone\Camel\Parts\Hump::removeSubHump
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
      * @uses \DCarbone\Camel\Parts\Hump
      */
     public function testCanRemoveSubHumpViaSubHumpTypeString()
     {
-        $hump = new Hump('Query', array('xmlns' => ''));
+        $hump = new Hump('Query', '', array('xmlns' => ''));
         $subHump = new Hump('query', '', array(), true);
         $hump->addSubHump($subHump);
         $hump->removeSubHump($subHump->getType());
@@ -90,11 +91,12 @@ class HumpTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers \DCarbone\Camel\Parts\Hump::removeSubHump
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
      * @uses \DCarbone\Camel\Parts\Hump
      */
     public function testCanRemoveSubHumpViaSubHumpObject()
     {
-        $hump = new Hump('Query', array('xmlns' => ''));
+        $hump = new Hump('Query', '', array('xmlns' => ''));
         $subHump = new Hump('query', '', array(), true);
         $hump->addSubHump($subHump);
         $hump->removeSubHump($subHump);
