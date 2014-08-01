@@ -99,10 +99,9 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function removeSubHump($hump)
     {
-        $idx = -1;
         if ($hump instanceof Hump)
         {
-            $idx = $this->indexOf($hump);
+            $this->removeElement($hump);
         }
         else if (is_string($hump))
         {
@@ -111,14 +110,11 @@ class Hump extends AbstractCollectionPlus implements IHump
                 /** @var \DCarbone\Camel\Parts\IHump $h */
                 if ($h->getType() === $hump)
                 {
-                    $idx = $i;
+                    unset($this[$i]);
                     break;
                 }
             }
         }
-
-        if ($idx >= 0)
-            unset($this[$idx]);
 
         return $this;
     }
@@ -157,7 +153,7 @@ class Hump extends AbstractCollectionPlus implements IHump
      *
      * @link http://us1.php.net/array_map
      *
-     * They scope "static" is used so that an instance of the extended class is returned.
+     * The scope "static" is used so that an instance of the extended class is returned.
      *
      * @param callable $func
      * @throws \InvalidArgumentException

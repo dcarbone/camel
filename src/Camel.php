@@ -63,10 +63,9 @@ class Camel extends AbstractCollectionPlus
      */
     public function removeHump($hump)
     {
-        $idx = -1;
-        if ($hump instanceof IHump)
+        if ($hump instanceof Hump)
         {
-            $idx = $this->indexOf($hump);
+            $this->removeElement($hump);
         }
         else if (is_string($hump))
         {
@@ -75,14 +74,11 @@ class Camel extends AbstractCollectionPlus
                 /** @var \DCarbone\Camel\Parts\IHump $h */
                 if ($h->getType() === $hump)
                 {
-                    $idx = $i;
+                    unset($this[$i]);
                     break;
                 }
             }
         }
-
-        if ($idx >= 0)
-            unset($this[$idx]);
 
         return $this;
     }
