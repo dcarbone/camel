@@ -31,6 +31,7 @@ class CamelTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers \DCarbone\Camel\Camel::__toString
+     * @uses \DCarbone\Camel\Camel
      * @depends testObjectCanBeConstructedForValidConstructorArguments
      * @param Camel $camel
      * @return string
@@ -45,6 +46,8 @@ class CamelTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Camel::getAsSXE
      * @covers \DCarbone\Camel\Camel::__toString
+     * @uses \DCarbone\Camel\Camel
+     * @uses \SimpleXMLElement
      * @depends testObjectCanBeConstructedForValidConstructorArguments
      * @param Camel $camel
      * @return \SimpleXMLElement
@@ -54,5 +57,37 @@ class CamelTest extends PHPUnit_Framework_TestCase
         $sxe = $camel->getAsSXE();
         $this->assertInstanceOf('SimpleXMLElement', $sxe);
         return $sxe;
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Camel::newHump
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @uses \DCarbone\Camel\Camel
+     * @uses \DCarbone\Camel\Parts\Hump
+     * @depends testObjectCanBeConstructedForValidConstructorArguments
+     * @param Camel $camel
+     */
+    public function testCanCreateNewHump(Camel $camel)
+    {
+        $hump = $camel->newHump('listName', 'My Great List');
+        $this->assertInstanceOf('DCarbone\\Camel\\Parts\\Hump', $hump);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Camel::addHump
+     * @covers \DCarbone\Camel\Camel::newHump
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @uses \DCarbone\Camel\Camel
+     * @uses \DCarbone\Camel\Parts\Hump
+     * @depends testObjectCanBeConstructedForValidConstructorArguments
+     * @param Camel $camel
+     */
+    public function testCanAppendHump(Camel $camel)
+    {
+        $hump = $camel->newHump('listName', 'My Great List');
+        $camel->addHump($hump);
+
+        $this->assertEquals(1, count($camel));
+        $this->assertTrue($camel->contains($hump));
     }
 }
