@@ -70,11 +70,14 @@ class Camel extends AbstractCollectionPlus
         }
         else if (is_string($hump))
         {
-            foreach($this as $idx=>$h)
+            foreach($this as $i=>$h)
             {
                 /** @var \DCarbone\Camel\Parts\IHump $h */
                 if ($h->getType() === $hump)
+                {
+                    $idx = $i;
                     break;
+                }
             }
         }
 
