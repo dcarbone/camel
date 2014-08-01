@@ -20,7 +20,7 @@ class Camel extends AbstractCollectionPlus
      */
     public function __construct($name, array $data = array())
     {
-        if (!is_string($name))
+        if (!is_string($name) || ($name = trim($name)) === '')
             throw new \InvalidArgumentException(__CLASS__.'::__construct - You must name your camel with a string');
 
         $this->name = $name;

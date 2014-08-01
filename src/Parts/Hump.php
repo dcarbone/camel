@@ -26,9 +26,13 @@ class Hump extends AbstractCollectionPlus implements IHump
      * @param array $attributes
      * @param bool $wrapWithAny
      * @param array $subHumps
+     * @throws \InvalidArgumentException
      */
     public function __construct($type, $value = '', array $attributes = array(), $wrapWithAny = false, $subHumps = array())
     {
+        if (!is_string($type) || ($type = trim($type)) === '')
+            throw new \InvalidArgumentException(__CLASS__.'::__construct - "$type" parameter must be string');
+
         $this->type = $type;
         $this->value = $value;
         $this->attributes = $attributes;

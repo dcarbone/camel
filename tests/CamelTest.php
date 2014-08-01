@@ -5,8 +5,8 @@ use DCarbone\Camel\Camel;
 /**
  * Class CamelTest
  */
-class CamelTest extends PHPUnit_Framework_TestCase {
-
+class CamelTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @covers \DCarbone\Camel\Camel::__construct
      * @uses \DCarbone\Camel\Camel
@@ -19,7 +19,7 @@ class CamelTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers \DCarbone\Camel\Camel::__construct
-     * @covers \DCarbone\Camel\Camel
+     * @uses \DCarbone\Camel\Camel
      * @return Camel
      */
     public function testObjectCanBeConstructedForValidConstructorArguments()
@@ -30,12 +30,29 @@ class CamelTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @param Camel $camel
-     * @covers \DCarbone\Camel\Camel::getName
+     * @covers \DCarbone\Camel\Camel::__toString
      * @depends testObjectCanBeConstructedForValidConstructorArguments
+     * @param Camel $camel
+     * @return string
      */
-    public function testNameCanBeRetrieved(Camel $camel)
+    public function testCanTypecastObjectToString(Camel $camel)
     {
-        $this->assertEquals('GetListItems', $camel->getName());
+        $string = (string)$camel;
+        $this->assertTrue(is_string($string), 'Non-string value returned from "(string)$camel".  Saw "'.gettype($string).'"');
+        return $string;
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Camel::getAsSXE
+     * @covers \DCarbone\Camel\Camel::__toString
+     * @depends testObjectCanBeConstructedForValidConstructorArguments
+     * @param Camel $camel
+     * @return \SimpleXMLElement
+     */
+    public function testCanGetSXEOfObject(Camel $camel)
+    {
+        $sxe = $camel->getAsSXE();
+        $this->assertInstanceOf('SimpleXMLElement', $sxe);
+        return $sxe;
     }
 }
