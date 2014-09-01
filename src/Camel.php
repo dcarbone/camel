@@ -116,7 +116,10 @@ class Camel extends AbstractCollectionPlus
         return $return.'</'.$this->name.'>';
     }
 
-    public function __toArray()
+    /**
+     * @return array
+     */
+    public function toSoapClientArgumentArray()
     {
         $sxe = $this->getAsSXE();
 

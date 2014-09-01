@@ -27,6 +27,10 @@ class CamelTest extends PHPUnit_Framework_TestCase
         return $camel;
     }
 
+
+
+
+
     /**
      * @covers \DCarbone\Camel\Camel::__toString
      * @uses \DCarbone\Camel\Camel
@@ -54,6 +58,7 @@ class CamelTest extends PHPUnit_Framework_TestCase
     {
         $sxe = $camel->getAsSXE();
         $this->assertInstanceOf('SimpleXMLElement', $sxe);
+
         return $sxe;
     }
 

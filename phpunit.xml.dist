@@ -12,13 +12,13 @@
         syntaxCheck="true"
         >
 
-    <testsuite name="Camel">
-        <directory>./tests/Camel</directory>
+    <testsuite name="Hump">
+        <directory>./tests/Hump</directory>
         <exclude>./tests/misc</exclude>
     </testsuite>
 
-    <testsuite name="Hump">
-        <directory>./tests/Hump</directory>
+    <testsuite name="Camel">
+        <directory>./tests/Camel</directory>
         <exclude>./tests/misc</exclude>
     </testsuite>
 

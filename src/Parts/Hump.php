@@ -26,12 +26,16 @@ class Hump extends AbstractCollectionPlus implements IHump
      * @param array $attributes
      * @param bool $wrapWithAny
      * @param array $subHumps
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($type, $value = '', array $attributes = array(), $wrapWithAny = false, $subHumps = array())
+    public function __construct($type, $value = null, array $attributes = array(), $wrapWithAny = false, $subHumps = array())
     {
         if (!is_string($type) || ($type = trim($type)) === '')
             throw new \InvalidArgumentException(__CLASS__.'::__construct - "$type" parameter must be string');
+
+        if ($value !== null && !is_string($value))
+            throw new \RuntimeException(get_class($this).'::__construct - "$value" parameter must be null or string, saw '.gettype($value));
 
         $this->type = $type;
         $this->value = $value;
@@ -39,6 +43,15 @@ class Hump extends AbstractCollectionPlus implements IHump
         $this->wrapWithAny = $wrapWithAny;
 
         parent::__construct($subHumps);
+    }
+
+    /**
+     * @param array $data
+     * @return \DCarbone\Camel\Parts\IHump
+     */
+    protected function initNew(array $data = array())
+    {
+        return new static($this->type, $this->value, $this->attributes, $this->wrapWithAny, $data);
     }
 
     /**
@@ -130,6 +143,10 @@ class Hump extends AbstractCollectionPlus implements IHump
 
         foreach($this->attributes as $attName=>$attValue)
             $string .= ' '.$attName.'="'.$attValue.'"';
+
+        if (count($this) === 0 && (!isset($this->value) || $this->value === ''))
+            return $string.' />'.($this->wrapWithAny ? '</any>' : '');
+
         $string .= '>';
 
         // Add child elements
@@ -142,54 +159,5 @@ class Hump extends AbstractCollectionPlus implements IHump
 
         // Close and return XML string
         return $string.'</'.$this->type.'>'.($this->wrapWithAny ? '</any>' : '');
-    }
-
-    /**
-     * Applies array_map to this dataset, and returns a new object.
-     *
-     * @link http://us1.php.net/array_map
-     *
-     * The scope "static" is used so that an instance of the extended class is returned.
-     *
-     * @param callable $func
-     * @throws \InvalidArgumentException
-     * @return static
-     */
-    public function map($func)
-    {
-        if (!is_callable($func, false, $callable_name))
-            throw new \InvalidArgumentException(__CLASS__.'::map - Un-callable "$func" value seen!');
-
-        if (strpos($callable_name, 'Closure::') !== 0)
-            $func = $callable_name;
-
-        return new static($this->type, $this->value, $this->attributes, $this->wrapWithAny, array_map($func, $this->__toArray()));
-    }
-
-    /**
-     * Applies array_filter to internal dataset, returns new instance with resulting values.
-     *
-     * @link http://www.php.net/manual/en/function.array-filter.php
-     *
-     * Inspired by:
-     *
-     * @link http://www.doctrine-project.org/api/common/2.3/source-class-Doctrine.Common.Collections.ArrayCollection.html#377-387
-     *
-     * @param callable $func
-     * @throws \InvalidArgumentException
-     * @return static
-     */
-    public function filter($func = null)
-    {
-        if ($func !== null && !is_callable($func, false, $callable_name))
-            throw new \InvalidArgumentException(__CLASS__.'::filter - Un-callable "$func" value seen!');
-
-        if ($func === null)
-            return new static($this->type, $this->value, $this->attributes, $this->wrapWithAny, array_filter($this->__toArray()));
-
-        if (strpos($callable_name, 'Closure::') !== 0)
-            $func = $callable_name;
-
-        return new static($this->type, $this->value, $this->attributes, $this->wrapWithAny, array_filter($this->__toArray(), $func));
     }
 }
