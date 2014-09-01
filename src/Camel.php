@@ -102,51 +102,11 @@ class Camel extends AbstractCollectionPlus
     }
 
     /**
-     * Applies array_map to this dataset, and returns a new object.
-     *
-     * @link http://us1.php.net/array_map
-     *
-     * They scope "static" is used so that an instance of the extended class is returned.
-     *
-     * @param callable $func
-     * @throws \InvalidArgumentException
-     * @return static
+     * @param array $data
+     * @return \DCarbone\CollectionPlus\ICollectionPlus
      */
-    public function map($func)
+    protected function initNew(array $data = array())
     {
-        if (!is_callable($func, false, $callable_name))
-            throw new \InvalidArgumentException(__CLASS__.'::map - Un-callable "$func" value seen!');
-
-        if (strpos($callable_name, 'Closure::') !== 0)
-            $func = $callable_name;
-
-        return new static($this->name, array_map($func, $this->__toArray()));
-    }
-
-    /**
-     * Applies array_filter to internal dataset, returns new instance with resulting values.
-     *
-     * @link http://www.php.net/manual/en/function.array-filter.php
-     *
-     * Inspired by:
-     *
-     * @link http://www.doctrine-project.org/api/common/2.3/source-class-Doctrine.Common.Collections.ArrayCollection.html#377-387
-     *
-     * @param callable $func
-     * @throws \InvalidArgumentException
-     * @return static
-     */
-    public function filter($func = null)
-    {
-        if ($func !== null && !is_callable($func, false, $callable_name))
-            throw new \InvalidArgumentException(__CLASS__.'::filter - Un-callable "$func" value seen!');
-
-        if ($func === null)
-            return new static(array_filter($this->__toArray()));
-
-        if (strpos($callable_name, 'Closure::') !== 0)
-            $func = $callable_name;
-
-        return new static($this->name, array_filter($this->__toArray(), $func));
+        return new static($this->name, $data);
     }
 }
