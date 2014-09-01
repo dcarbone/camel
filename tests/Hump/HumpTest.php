@@ -61,7 +61,7 @@ class HumpTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Parts\Hump::__construct
      * @covers \DCarbone\Camel\Parts\Hump::addSubHump
-     * @uses \DCarbone\Camle\Parts\Hump
+     * @uses \DCarbone\Camel\Parts\Hump
      * @depends testObjectCanBeConstructedForValidConstructorArguments
      * @param Hump $hump
      * @return array

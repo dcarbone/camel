@@ -80,11 +80,26 @@ class Camel extends AbstractCollectionPlus
     }
 
     /**
+     * @throws \RuntimeException
      * @return \SimpleXMLElement
      */
     public function getAsSXE()
     {
-        return new \SimpleXMLElement((string)$this);
+        try {
+            if (defined('LIBXML_PARSEHUGE'))
+                $arg = LIBXML_COMPACT | LIBXML_NOBLANKS | LIBXML_PARSEHUGE;
+            else
+                $arg = LIBXML_COMPACT | LIBXML_NOBLANKS;
+
+            return @new \SimpleXMLElement((string)$this, $arg);
+        }
+        catch (\Exception $e)
+        {
+            if (libxml_get_last_error() !== false)
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.libxml_get_last_error()->message.'"');
+            else
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.$e->getMessage().'"');
+        }
     }
 
     /**
@@ -99,6 +114,54 @@ class Camel extends AbstractCollectionPlus
             $return .= (string)$hump;
 
         return $return.'</'.$this->name.'>';
+    }
+
+    public function __toArray()
+    {
+        $sxe = $this->getAsSXE();
+
+        $array = array($this->name => array());
+
+        /**
+         * @param \SimpleXMLElement $element
+         * @param array $array
+         */
+        $parseXml = function(\SimpleXMLElement $element, array &$array) use ($sxe, &$parseXml) {
+            $children = $element->children();
+            $attributes = $element->attributes();
+            $value = trim((string)$element);
+
+            if (count($children) > 0)
+            {
+                if ($element->getName() === 'any')
+                {
+                    $array[$element->getName()] = $children[0]->saveXML();
+                }
+                else
+                {
+                    if (!isset($array[$element->getName()]))
+                        $array[$element->getName()] = array();
+
+                    foreach($children as $child)
+                    {
+                        /** @var \SimpleXMLElement $child */
+                        $parseXml($child, $array[$element->getName()]);
+                    }
+                }
+            }
+            else
+            {
+                $array[$element->getName()] = $value;
+            }
+        };
+
+        foreach($sxe->children() as $element)
+        {
+            /** @var $element \SimpleXMLElement */
+            $parseXml($element, $array[$sxe->getName()]);
+        }
+
+        return $array;
     }
 
     /**
