@@ -51,9 +51,9 @@ $camel
 
 This can then be utilized in one of the following ways:
 
-### As XML
+### As XML String
 ```php
-$xml = $camel->getAsXML();
+$xml = (string)$camel;
 ```
 
 ### As [\SimpleXMLElement](http://php.net/manual/en/class.simplexmlelement.php)
