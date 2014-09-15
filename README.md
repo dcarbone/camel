@@ -5,7 +5,7 @@ A library designed to help facilitate SharePoint CAML query construction
 
 **Build Status**
 - master: [![Build Status](https://travis-ci.org/dcarbone/camel.svg?branch=master)](https://travis-ci.org/dcarbone/camel)
-- 0.2.*: [![Build Status](https://travis-ci.org/dcarbone/camel.svg?branch=0.2.0)](https://travis-ci.org/dcarbone/camel)
+- 0.2.*: [![Build Status](https://travis-ci.org/dcarbone/camel.svg?tag=0.2.0)](https://travis-ci.org/dcarbone/camel)
 
 ## Inclusion in your Composer application
 
