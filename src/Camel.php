@@ -3,28 +3,77 @@
 use DCarbone\Camel\Parts\Hump;
 use DCarbone\Camel\Parts\IHump;
 use DCarbone\CollectionPlus\AbstractCollectionPlus;
+use DCarbone\CollectionPlus\BaseCollectionPlus;
 
 /**
  * Class Camel
  * @package DCarbone\Camel
+ *
+ * @property string name
+ * @property \SimpleXMLElement sxe
+ * @property \DCarbone\CollectionPlus\BaseCollectionPlus humps
  */
-class Camel extends AbstractCollectionPlus
+class Camel
 {
     /** @var string */
-    protected $name;
+    protected $_name;
+
+    /** @var \DCarbone\CollectionPlus\BaseCollectionPlus */
+    protected $_humps;
 
     /**
      * @param string $name
-     * @param array $data
+     * @param null|array|\DCarbone\CollectionPlus\BaseCollectionPlus $humps
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($name, array $data = array())
+    public function __construct($name, $humps = null)
     {
-        if (!is_string($name) || ($name = trim($name)) === '')
-            throw new \InvalidArgumentException(__CLASS__.'::__construct - You must name your camel with a string');
+        if (!is_string($name))
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 1 must be string, '.gettype($name).' seen.');
 
-        $this->name = $name;
-        parent::__construct($data);
+        if (($name = trim($name)) === '')
+            throw new \RuntimeException(get_class($this).'::__construct - Argument 1 cannot be empty string.');
+
+        $this->_name = $name;
+
+        if (is_array($humps))
+            $this->_humps = new BaseCollectionPlus($humps);
+        else if ($humps instanceof BaseCollectionPlus)
+            $this->_humps = $humps;
+        else if (null === $humps)
+            $this->_humps = new BaseCollectionPlus();
+        else
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 2 expected to be array, instance of \\DCarbone\\CollectionPlus\\BaseCollectionPlus, or null.  '.gettype($humps).' seen.');
+    }
+
+    /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+        unset($this->_humps);
+    }
+
+    /**
+     * @param string $param
+     * @return BaseCollectionPlus|\SimpleXMLElement|string
+     * @throws \OutOfBoundsException
+     */
+    public function __get($param)
+    {
+        switch($param)
+        {
+            case 'name':
+                return $this->_name;
+            case 'humps':
+                return $this->_humps;
+            case 'sxe':
+                return $this->getAsSXE();
+
+            default:
+                throw new \OutOfBoundsException(get_class($this).' - No property "'.$param.'" exists on this class.');
+        }
     }
 
     /**
@@ -32,7 +81,7 @@ class Camel extends AbstractCollectionPlus
      */
     public function getName()
     {
-        return $this->name;
+        return $this->_name;
     }
 
     /**
@@ -53,7 +102,7 @@ class Camel extends AbstractCollectionPlus
      */
     public function addHump(IHump $hump)
     {
-        $this->append($hump);
+        $this->_humps->append($hump);
         return $this;
     }
 
@@ -63,18 +112,21 @@ class Camel extends AbstractCollectionPlus
      */
     public function removeHump($hump)
     {
-        foreach($this as $h)
+        if (is_string($hump))
         {
-            /** @var \DCarbone\Camel\Parts\IHump $h */
-            if ($h->getType() === $hump)
+            foreach($this->_humps as $h)
             {
-                $hump = $h;
-                break;
+                /** @var \DCarbone\Camel\Parts\IHump $h */
+                if ($h->getType() === $hump)
+                {
+                    $hump = $h;
+                    break;
+                }
             }
         }
 
         if ($hump instanceof Hump)
-            $this->removeElement($hump);
+            $this->_humps->removeElement($hump);
 
         return $this;
     }
@@ -91,14 +143,17 @@ class Camel extends AbstractCollectionPlus
             else
                 $arg = LIBXML_COMPACT | LIBXML_NOBLANKS;
 
-            return @new \SimpleXMLElement((string)$this, $arg);
+            $strVal = (string)$this;
+            $sxe = new \SimpleXMLElement($strVal, $arg);
+
+            return $sxe;
         }
         catch (\Exception $e)
         {
             if (libxml_get_last_error() !== false)
-                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.libxml_get_last_error()->message.'"');
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.libxml_get_last_error()->message.'"', $e->getCode(), $e);
             else
-                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.$e->getMessage().'"');
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.$e->getMessage().'"', $e->getCode(), $e);
         }
     }
 
@@ -107,13 +162,24 @@ class Camel extends AbstractCollectionPlus
      */
     public function __toString()
     {
-        $return = '<'.$this->name.
+        $return = '<'.$this->_name.
             ' xmlns="http://schemas.microsoft.com/sharepoint/soap/">';
 
-        foreach($this as $hump)
-            $return .= (string)$hump;
+        foreach($this->_humps as $hump)
+        {
+            $humpVal = (string)$hump;
+            $return .= $humpVal;
+        }
 
-        return $return.'</'.$this->name.'>';
+        return $return.'</'.$this->_name.'>';
+    }
+
+    /**
+     * @return array
+     */
+    public function __toArray()
+    {
+        return $this->toSoapClientArgumentArray();
     }
 
     /**
@@ -122,57 +188,53 @@ class Camel extends AbstractCollectionPlus
     public function toSoapClientArgumentArray()
     {
         $sxe = $this->getAsSXE();
-
-        $array = array($this->name => array());
-
-        /**
-         * @param \SimpleXMLElement $element
-         * @param array $array
-         */
-        $parseXml = function(\SimpleXMLElement $element, array &$array) use ($sxe, &$parseXml) {
-            $children = $element->children();
-            $attributes = $element->attributes();
-            $value = trim((string)$element);
-
-            if (count($children) > 0)
-            {
-                if ($element->getName() === 'any')
-                {
-                    $array[$element->getName()] = $children[0]->saveXML();
-                }
-                else
-                {
-                    if (!isset($array[$element->getName()]))
-                        $array[$element->getName()] = array();
-
-                    foreach($children as $child)
-                    {
-                        /** @var \SimpleXMLElement $child */
-                        $parseXml($child, $array[$element->getName()]);
-                    }
-                }
-            }
-            else
-            {
-                $array[$element->getName()] = $value;
-            }
-        };
+        $name = $sxe->getName();
+        $array = array($this->_name => array());
 
         foreach($sxe->children() as $element)
         {
             /** @var $element \SimpleXMLElement */
-            $parseXml($element, $array[$sxe->getName()]);
+            $this->parseXML($element, $array[$name]);
         }
 
         return $array;
     }
 
     /**
-     * @param array $data
-     * @return \DCarbone\CollectionPlus\ICollectionPlus
+     * @param \SimpleXMLElement $element
+     * @param array $array
      */
-    protected function initNew(array $data = array())
+    protected function parseXML(\SimpleXMLElement $element, array &$array)
     {
-        return new static($this->name, $data);
+        /** @var array $children */
+        $children = $element->children();
+//        $attributes = $element->attributes();
+        $elementValue = trim((string)$element);
+        $elementName = $element->getName();
+
+        if (count($children) > 0)
+        {
+            if ($elementName === 'any')
+            {
+                /** @var \SimpleXMLElement $child */
+                $child = $children[0];
+                $array[$elementName] = $child->saveXML();
+            }
+            else
+            {
+                if (!isset($array[$elementName]))
+                    $array[$elementName] = array();
+
+                foreach($children as $child)
+                {
+                    /** @var \SimpleXMLElement $child */
+                    $this->parseXML($child, $array[$elementName]);
+                }
+            }
+        }
+        else
+        {
+            $array[$elementName] = $elementValue;
+        }
     }
 }

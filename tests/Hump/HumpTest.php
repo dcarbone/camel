@@ -10,7 +10,7 @@ class HumpTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Parts\Hump
      * @expectedException \InvalidArgumentException
      */
-    public function testExceptionRaisedWhenConstructingWithInvalidHumpTypeParameter()
+    public function testExceptionRaisedWhenConstructingHumpWithInvalidHumpTypeParameterType()
     {
         new \DCarbone\Camel\Parts\Hump(null);
     }
@@ -20,7 +20,17 @@ class HumpTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Parts\Hump
      * @expectedException \RuntimeException
      */
-    public function testExceptionRaisedWhenConstructingWithInvalidValueParameter()
+    public function testExceptionThrownWhenConstructingHumpWithInvalidHumpTypeParameterValue()
+    {
+        new \DCarbone\Camel\Parts\Hump('');
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @uses \DCarbone\Camel\Parts\Hump
+     * @expectedException \InvalidArgumentException
+     */
+    public function testExceptionRaisedWhenConstructingHumpWithInvalidValueParameterType()
     {
         new \DCarbone\Camel\Parts\Hump('Hump', array());
     }
@@ -139,8 +149,8 @@ class HumpTest extends PHPUnit_Framework_TestCase
     {
         $subHump = new \DCarbone\Camel\Parts\Hump('query', '', array(), true);
         $hump->addSubHump($subHump);
-        $this->assertEquals(1, count($hump));
-        $this->assertTrue($hump->contains($subHump));
+        $this->assertEquals(1, count($hump->subHumps));
+        $this->assertTrue($hump->subHumps->contains($subHump));
         return array($hump, $subHump);
     }
 
@@ -155,7 +165,7 @@ class HumpTest extends PHPUnit_Framework_TestCase
         $subHump = new \DCarbone\Camel\Parts\Hump('query', '', array(), true);
         $hump->addSubHump($subHump);
         $hump->removeSubHump($subHump->getType());
-        $this->assertEquals(0, count($hump));
+        $this->assertEquals(0, count($hump->subHumps));
     }
 
     /**
@@ -169,6 +179,68 @@ class HumpTest extends PHPUnit_Framework_TestCase
         $subHump = new \DCarbone\Camel\Parts\Hump('query', '', array(), true);
         $hump->addSubHump($subHump);
         $hump->removeSubHump($subHump);
-        $this->assertEquals(0, count($hump));
+        $this->assertEquals(0, count($hump->subHumps));
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @covers \DCarbone\Camel\Parts\Hump::__get
+     * @covers \DCarbone\Camel\Parts\Hump::getAsSXE
+     * @uses \DCarbone\Camel\Parts\Hump
+     * @uses \DCarbone\CollectionPlus\BaseCollectionPlus
+     */
+    public function testCanGetHumpPropertiesWithMagicMethod()
+    {
+        $hump = new \DCarbone\Camel\Parts\Hump('Query', null, array('xmlns' => ''), true, array(
+            new \DCarbone\Camel\Parts\Hump('SubHump')
+        ));
+
+
+        $type = $hump->type;
+        $this->assertInternalType('string', $type);
+        $this->assertEquals('Query', $type);
+
+        $value = $hump->value;
+        $this->assertInternalType('string', $value);
+        $this->assertEquals('', $value);
+
+        $attributes = $hump->attributes;
+        $this->assertInternalType('array', $attributes);
+        $this->assertCount(1, $attributes);
+        $this->assertArrayHasKey('xmlns', $attributes);
+
+        $wrapWithAny = $hump->wrapWithAny;
+        $this->assertInternalType('bool', $wrapWithAny);
+        $this->assertTrue($wrapWithAny);
+
+        $subHumps = $hump->subHumps;
+        $this->assertInstanceOf('\\DCarbone\\CollectionPlus\\BaseCollectionPlus', $subHumps);
+        $this->assertCount(1, $subHumps);
+
+        $sxe = $hump->sxe;
+        $this->assertInstanceOf('\\SimpleXMLElement', $sxe);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Parts\Hump::__get
+     * @uses \DCarbone\Camel\Parts\Hump
+     * @expectedException \OutOfBoundsException
+     */
+    public function testExceptionThrownWhenTryingToAccessInvalidProperty()
+    {
+        $hump = new \DCarbone\Camel\Parts\Hump('Query', null);
+
+        $hump->sandwich;
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Parts\Hump::getValue
+     * @uses \DCarbone\Camel\Parts\Hump
+     */
+    public function testCanGetValueOfHump()
+    {
+        $hump = new \DCarbone\Camel\Parts\Hump('Hump', 'humpy');
+
+        $this->assertEquals('humpy', $hump->getValue());
     }
 }

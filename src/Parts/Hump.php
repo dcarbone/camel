@@ -1,24 +1,35 @@
 <?php namespace DCarbone\Camel\Parts;
 
 use DCarbone\CollectionPlus\AbstractCollectionPlus;
+use DCarbone\CollectionPlus\BaseCollectionPlus;
 
 /**
  * Class Hump
  * @package DCarbone\Camel\Parts\Humps
+ *
+ * @property string type
+ * @property array attributes
+ * @property string value
+ * @property bool wrapWithAny
+ * @property \SimpleXMLElement sxe
+ * @property \DCarbone\CollectionPlus\BaseCollectionPlus subHumps
  */
-class Hump extends AbstractCollectionPlus implements IHump
+class Hump implements IHump
 {
     /** @var string */
-    protected $type;
+    protected $_type;
 
     /** @var array */
-    protected $attributes;
+    protected $_attributes;
 
     /** @var string */
-    protected $value;
+    protected $_value;
 
     /** @var bool */
-    private $wrapWithAny;
+    protected $_wrapWithAny;
+
+    /** @var \DCarbone\CollectionPlus\BaseCollectionPlus */
+    protected $_subHumps;
 
     /**
      * @param string $type
@@ -29,29 +40,79 @@ class Hump extends AbstractCollectionPlus implements IHump
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($type, $value = null, array $attributes = array(), $wrapWithAny = false, $subHumps = array())
+    public function __construct($type, $value = null, $attributes = array(), $wrapWithAny = false, $subHumps = array())
     {
-        if (!is_string($type) || ($type = trim($type)) === '')
-            throw new \InvalidArgumentException(__CLASS__.'::__construct - "$type" parameter must be string');
+        if (!is_string($type))
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 1 must be string, '.gettype($type).' seen.');
+
+        if (($type = trim($type)) === '')
+            throw new \RuntimeException(get_class($this).'::__construct - Argument 1 cannot be empty string');
 
         if ($value !== null && !is_string($value))
-            throw new \RuntimeException(get_class($this).'::__construct - "$value" parameter must be null or string, saw '.gettype($value));
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 2 must be null or string, '.gettype($value).' seen.');
 
-        $this->type = $type;
-        $this->value = $value;
-        $this->attributes = $attributes;
-        $this->wrapWithAny = $wrapWithAny;
+        if ($attributes !== null && !is_array($attributes))
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 3 must be null or array, '.gettype($attributes).' seen.');
 
-        parent::__construct($subHumps);
+        if (!is_bool($wrapWithAny))
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 4 must be boolean, '.gettype($wrapWithAny).' seen.');
+
+        if ($subHumps !== null && !is_array($subHumps))
+            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 5 must be null or array, '.gettype($subHumps).' seen.');
+
+        $this->_type = $type;
+
+        if (null === $value)
+            $this->_value = '';
+        else
+            $this->_value = $value;
+
+        if (null === $attributes)
+            $this->_attributes = array();
+        else
+            $this->_attributes = $attributes;
+
+        $this->_wrapWithAny = $wrapWithAny;
+
+        if (null === $subHumps)
+            $this->_subHumps = new BaseCollectionPlus(array());
+        else
+            $this->_subHumps = new BaseCollectionPlus($subHumps);
     }
 
     /**
-     * @param array $data
-     * @return \DCarbone\Camel\Parts\IHump
+     * Destructor
      */
-    protected function initNew(array $data = array())
+    public function __destruct()
     {
-        return new static($this->type, $this->value, $this->attributes, $this->wrapWithAny, $data);
+        unset($this->_subHumps);
+    }
+
+    /**
+     * @param $param
+     * @return array|bool|BaseCollectionPlus|\SimpleXMLElement|string
+     * @throws \OutOfBoundsException
+     */
+    public function __get($param)
+    {
+        switch($param)
+        {
+            case 'type':
+                return $this->_type;
+            case 'attributes':
+                return $this->_attributes;
+            case 'value':
+                return $this->_value;
+            case 'wrapWithAny':
+                return $this->_wrapWithAny;
+            case 'subHumps':
+                return $this->_subHumps;
+            case 'sxe':
+                return $this->getAsSXE();
+
+            default:
+                throw new \OutOfBoundsException(get_class($this).' - No property "'.$param.'" exists on this class.');
+        }
     }
 
     /**
@@ -59,7 +120,7 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function getType()
     {
-        return $this->type;
+        return $this->_type;
     }
 
     /**
@@ -67,7 +128,7 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function getValue()
     {
-        return $this->value;
+        return $this->_value;
     }
 
     /**
@@ -75,7 +136,7 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function getAttributes()
     {
-        return $this->attributes;
+        return $this->_attributes;
     }
 
     /**
@@ -84,16 +145,34 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function wrapWithAny($v = true)
     {
-        $this->wrapWithAny = (bool)$v;
+        $this->_wrapWithAny = (bool)$v;
         return $this;
     }
 
     /**
+     * @throws \RuntimeException
      * @return \SimpleXMLElement
      */
     public function getAsSXE()
     {
-        return new \SimpleXMLElement((string)$this);
+        try {
+            if (defined('LIBXML_PARSEHUGE'))
+                $arg = LIBXML_COMPACT | LIBXML_NOBLANKS | LIBXML_PARSEHUGE;
+            else
+                $arg = LIBXML_COMPACT | LIBXML_NOBLANKS;
+
+            $strVal = (string)$this;
+            $sxe = new \SimpleXMLElement($strVal, $arg);
+
+            return $sxe;
+        }
+        catch (\Exception $e)
+        {
+            if (libxml_get_last_error() !== false)
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.libxml_get_last_error()->message.'"', $e->getCode(), $e);
+            else
+                throw new \RuntimeException(get_class($this).'::getAsSXE - "'.$e->getMessage().'"', $e->getCode(), $e);
+        }
     }
 
     /**
@@ -102,7 +181,7 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function addSubHump(IHump $hump)
     {
-        $this->append($hump);
+        $this->_subHumps->append($hump);
         return $this;
     }
 
@@ -112,18 +191,21 @@ class Hump extends AbstractCollectionPlus implements IHump
      */
     public function removeSubHump($hump)
     {
-        foreach($this as $h)
+        if (is_string($hump))
         {
-            /** @var \DCarbone\Camel\Parts\IHump $h */
-            if ($h->getType() === $hump)
+            foreach($this->_subHumps as $h)
             {
-                $hump = $h;
-                break;
+                /** @var \DCarbone\Camel\Parts\IHump $h */
+                if ($h->getType() === $hump)
+                {
+                    $hump = $h;
+                    break;
+                }
             }
         }
 
         if ($hump instanceof Hump)
-            $this->removeElement($hump);
+            $this->_subHumps->removeElement($hump);
 
         return $this;
     }
@@ -134,30 +216,43 @@ class Hump extends AbstractCollectionPlus implements IHump
     public function __toString()
     {
         // Build opening tag
-        if ($this->wrapWithAny === true)
+        if ($this->_wrapWithAny)
             $string = '<any>';
         else
             $string = '';
 
-        $string .= '<'.$this->type;
+        $string .= '<'.$this->_type;
 
-        foreach($this->attributes as $attName=>$attValue)
+        foreach($this->_attributes as $attName=>$attValue)
             $string .= ' '.$attName.'="'.$attValue.'"';
 
-        if (count($this) === 0 && (!isset($this->value) || $this->value === ''))
-            return $string.' />'.($this->wrapWithAny ? '</any>' : '');
+        // If this element has no value AND no children
+        if (count($this->_subHumps) === 0 && (!isset($this->_value) || $this->_value === ''))
+        {
+            $string .= ' />';
+            if ($this->_wrapWithAny)
+                $string .= '</any>';
+
+            return $string;
+        }
+
 
         $string .= '>';
 
         // Add child elements
-        if (count($this) > 0)
-            foreach($this as $subHump)
-                $string .= (string)$subHump;
+        if (count($this->_subHumps) > 0)
+        {
+            foreach($this->_subHumps as $subHump)
+            {
+                $subHumpString = (string)$subHump;
+                $string .= $subHumpString;
+            }
+        }
 
         // Add element value
-        $string .= (string)$this->value;
+        $string .= (string)$this->_value;
 
         // Close and return XML string
-        return $string.'</'.$this->type.'>'.($this->wrapWithAny ? '</any>' : '');
+        return $string.'</'.$this->_type.'>'.($this->_wrapWithAny ? '</any>' : '');
     }
 }
