@@ -13,6 +13,7 @@ A library designed to help facilitate SharePoint CAML query construction
 "require" : {
     "dcarbone/camel" : "0.2.*"
 }
+```
 
 ## Basic Concept
 
