@@ -2,7 +2,6 @@
 
 use DCarbone\Camel\Parts\Hump;
 use DCarbone\Camel\Parts\IHump;
-use DCarbone\CollectionPlus\AbstractCollectionPlus;
 use DCarbone\CollectionPlus\BaseCollectionPlus;
 
 /**

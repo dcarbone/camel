@@ -1,6 +1,5 @@
 <?php namespace DCarbone\Camel\Parts;
 
-use DCarbone\CollectionPlus\AbstractCollectionPlus;
 use DCarbone\CollectionPlus\BaseCollectionPlus;
 
 /**
