@@ -24,7 +24,7 @@ class Camel
     /**
      * @param string $name
      * @param null|array|\DCarbone\CollectionPlus\BaseCollectionPlus $humps
-     * @return \DCarbone\Camel\Camel
+     * @return static
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

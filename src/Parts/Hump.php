@@ -37,7 +37,7 @@ class Hump implements IHump
      * @param array $attributes
      * @param bool $wrapWithAny
      * @param array $subHumps
-     * @return \DCarbone\Camel\Parts\Hump
+     * @return static
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
