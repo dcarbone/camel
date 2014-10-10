@@ -23,28 +23,27 @@ SharePoint's SOAP services and CAML query language (hence the name).
 ## Basic Usage
 
 ```php
-$camel = new \DCarbone\Camel\Camel('GetListItems');
+$camel = Camel::init('GetListItems');
 
 $camel
     ->addHump(
-        $camel->newHump('listName', 'My List Name', array())
+        Hump::init('listName', 'My List Name', array())
     )
     ->addHump(
-        $camel->newHump('rowLimit', '1', array())
+        Hump::init('rowLimit', '1', array())
     )
     ->addHump(
-        $camel
-            ->newHump('query')
-            ->addSubHump($camel
-                ->newHump('Query', '', array('xmlns' => ''), true)
+        Hump::init('query')
+            ->addSubHump(
+                Hump::init('Query', '', array('xmlns' => ''), true)
                 ->addSubHump(
-                    $camel->newHump('Where')
+                    Hump::init('Where')
                         ->addSubHump(
-                            $camel->newHump('Eq', '<FieldRef Name="ColumnName" /><Value Type="Text">Column Value</Value>')
+                            Hump::init('Eq', '<FieldRef Name="ColumnName" /><Value Type="Text">Column Value</Value>')
                         )
                 )
                 ->addSubHump(
-                    $camel->newHump('OrderBy')
+                    Hump::init('OrderBy')
                 ))
     );
 ```

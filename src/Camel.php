@@ -20,6 +20,9 @@ class Camel
     /** @var \DCarbone\CollectionPlus\BaseCollectionPlus */
     protected $_humps;
 
+    // Use the init methods
+    protected function __construct() {}
+
     /**
      * @param string $name
      * @param null|array|\DCarbone\CollectionPlus\BaseCollectionPlus $humps

@@ -30,6 +30,9 @@ class Hump implements IHump
     /** @var \DCarbone\CollectionPlus\BaseCollectionPlus */
     protected $_subHumps;
 
+    // Use the init methods
+    protected function __construct() {}
+
     /**
      * @param string $type
      * @param string $value
