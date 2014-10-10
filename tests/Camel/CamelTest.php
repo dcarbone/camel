@@ -6,86 +6,86 @@
 class CamelTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @expectedException \InvalidArgumentException
      */
     public function testExceptionIsRaisedWhenConstructingCamelWithInvalidNameParameterType()
     {
-        new \DCarbone\Camel\Camel(null);
+        \DCarbone\Camel\Camel::init(null);
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @expectedException \RuntimeException
      */
     public function testExceptionRaisedWhenConstructingCamelWithInvalidNameParameterValue()
     {
-        new \DCarbone\Camel\Camel('');
+        \DCarbone\Camel\Camel::init('');
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @expectedException \InvalidArgumentException
      */
     public function testExceptionRaisedWhenConstructingCamelWithInvalidHumpsParameterType()
     {
-        new \DCarbone\Camel\Camel('Camel', 'sandwiches');
+         \DCarbone\Camel\Camel::init('Camel', 'sandwiches');
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\CollectionPlus\BaseCollectionPlus
      */
     public function testCanConstructCamelWithValidNameAndNoHumps()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel');
+        $camel =  \DCarbone\Camel\Camel::init('Camel');
 
         $this->assertInstanceOf('\\DCarbone\\Camel\\Camel', $camel);
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Parts\Hump
      * @uses \DCarbone\CollectionPlus\BaseCollectionPlus
      */
     public function testCanConstructCamelWithValidNameAndArrayOfHumps()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel', array(
-            new \DCarbone\Camel\Parts\Hump('Hump', 'humpy')
+        $camel =  \DCarbone\Camel\Camel::init('Camel', array(
+            \DCarbone\Camel\Parts\Hump::init('Hump', 'humpy')
         ));
 
         $this->assertInstanceOf('\\DCarbone\\Camel\\Camel', $camel);
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Parts\Hump
      * @uses \DCarbone\CollectionPlus\BaseCollectionPlus
      */
     public function testCanConstructCamelWithValidNameAndBaseCollectionPlusOfHumps()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel', new \DCarbone\CollectionPlus\BaseCollectionPlus(
+        $camel =  \DCarbone\Camel\Camel::init('Camel', new \DCarbone\CollectionPlus\BaseCollectionPlus(
             array(
-                new \DCarbone\Camel\Parts\Hump('Hump', 'humpy')
+                \DCarbone\Camel\Parts\Hump::init('Hump', 'humpy')
             )));
 
         $this->assertInstanceOf('\\DCarbone\\Camel\\Camel', $camel);
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
+     * @covers \DCarbone\Camel\Camel::init
      * @uses \DCarbone\Camel\Camel
      * @return \DCarbone\Camel\Camel
      */
     public function testObjectCanBeConstructedWithValidConstructorArguments()
     {
-        $camel = new \DCarbone\Camel\Camel('GetListItems', array());
+        $camel =  \DCarbone\Camel\Camel::init('GetListItems', array());
         $this->assertInstanceOf('DCarbone\\Camel\\Camel', $camel);
         return $camel;
     }
@@ -141,23 +141,8 @@ class CamelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::newHump
-     * @covers \DCarbone\Camel\Parts\Hump::__construct
-     * @uses \DCarbone\Camel\Camel
-     * @uses \DCarbone\Camel\Parts\Hump
-     * @depends testObjectCanBeConstructedWithValidConstructorArguments
-     * @param \DCarbone\Camel\Camel $camel
-     */
-    public function testCanCreateNewHump(\DCarbone\Camel\Camel $camel)
-    {
-        $hump = $camel->newHump('listName', 'My Great List');
-        $this->assertInstanceOf('DCarbone\\Camel\\Parts\\Hump', $hump);
-    }
-
-    /**
      * @covers \DCarbone\Camel\Camel::addHump
-     * @covers \DCarbone\Camel\Camel::newHump
-     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @covers \DCarbone\Camel\Parts\Hump::init
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Parts\Hump
      * @depends testObjectCanBeConstructedWithValidConstructorArguments
@@ -165,7 +150,7 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testCanAppendHump(\DCarbone\Camel\Camel $camel)
     {
-        $hump = $camel->newHump('listName', 'My Great List');
+        $hump = \DCarbone\Camel\Parts\Hump::init('listName', 'My Great List');
         $camel->addHump($hump);
 
         $this->assertEquals(1, count($camel->humps));
@@ -180,8 +165,8 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetCamelPropertiesWithMagicMethod()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel', array(
-            new \DCarbone\Camel\Parts\Hump('Hump', 'hump value')));
+        $camel =  \DCarbone\Camel\Camel::init('Camel', array(
+            \DCarbone\Camel\Parts\Hump::init('Hump', 'hump value')));
 
         $name = $camel->name;
         $this->assertInternalType('string', $name);
@@ -202,9 +187,9 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testExceptionThrownWhenTryingToAccessInvalidCamelProperty()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel');
+        $camel =  \DCarbone\Camel\Camel::init('Camel');
 
-        $camel->sandwiches;
+        $camel->{'sandwiches'};
     }
 
     /**
@@ -213,7 +198,7 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetNameOfCamel()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel');
+        $camel =  \DCarbone\Camel\Camel::init('Camel');
 
         $name = $camel->getName();
         $this->assertInternalType('string', $name);
@@ -221,8 +206,8 @@ class CamelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Camel::__construct
-     * @covers \DCarbone\Camel\Parts\Hump::__construct
+     * @covers \DCarbone\Camel\Camel::init
+     * @covers \DCarbone\Camel\Parts\Hump::init
      * @covers \DCarbone\Camel\Parts\Hump::__get
      * @covers \DCarbone\Camel\Camel::removeHump
      * @covers \DCarbone\Camel\Camel::__get
@@ -232,9 +217,9 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testCanRemoveHumpFromCamelByHumpName()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel', array(
-            new \DCarbone\Camel\Parts\Hump('Hump', 'hump value'),
-            new \DCarbone\Camel\Parts\Hump('Hump2', 'hump 2 value')));
+        $camel =  \DCarbone\Camel\Camel::init('Camel', array(
+            \DCarbone\Camel\Parts\Hump::init('Hump', 'hump value'),
+            \DCarbone\Camel\Parts\Hump::init('Hump2', 'hump 2 value')));
 
         $humps = $camel->humps;
         $this->assertInstanceOf('\\DCarbone\\CollectionPlus\\BaseCollectionPlus', $humps);
@@ -262,10 +247,10 @@ class CamelTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetSOAPClientArgumentArray()
     {
-        $camel = new \DCarbone\Camel\Camel('Camel', array(
-            new \DCarbone\Camel\Parts\Hump('Hump', 'hump value', null, true),
-            new \DCarbone\Camel\Parts\Hump('Hump2', 'hump 2 value', null, false, array(
-                new \DCarbone\Camel\Parts\Hump('SubHump', 'sub hump value')
+        $camel =  \DCarbone\Camel\Camel::init('Camel', array(
+            \DCarbone\Camel\Parts\Hump::init('Hump', 'hump value', null, true),
+            \DCarbone\Camel\Parts\Hump::init('Hump2', 'hump 2 value', null, false, array(
+                \DCarbone\Camel\Parts\Hump::init('SubHump', 'sub hump value')
             ))));
 
         $array = $camel->toSoapClientArgumentArray();

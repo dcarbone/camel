@@ -24,35 +24,33 @@ class Camel
     /**
      * @param string $name
      * @param null|array|\DCarbone\CollectionPlus\BaseCollectionPlus $humps
+     * @return \DCarbone\Camel\Camel
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($name, $humps = null)
+    public static function init($name, $humps = null)
     {
         if (!is_string($name))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 1 must be string, '.gettype($name).' seen.');
+            throw new \InvalidArgumentException('Argument 1 must be string, '.gettype($name).' seen.');
 
         if (($name = trim($name)) === '')
-            throw new \RuntimeException(get_class($this).'::__construct - Argument 1 cannot be empty string.');
+            throw new \RuntimeException('Argument 1 cannot be empty string.');
 
-        $this->_name = $name;
+        /** @var \DCarbone\Camel\Camel $camel */
+        $camel = new static;
+
+        $camel->_name = $name;
 
         if (is_array($humps))
-            $this->_humps = new BaseCollectionPlus($humps);
+            $camel->_humps = new BaseCollectionPlus($humps);
         else if ($humps instanceof BaseCollectionPlus)
-            $this->_humps = $humps;
+            $camel->_humps = $humps;
         else if (null === $humps)
-            $this->_humps = new BaseCollectionPlus();
+            $camel->_humps = new BaseCollectionPlus();
         else
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 2 expected to be array, instance of \\DCarbone\\CollectionPlus\\BaseCollectionPlus, or null.  '.gettype($humps).' seen.');
-    }
+            throw new \InvalidArgumentException('Argument 2 expected to be array, instance of \\DCarbone\\CollectionPlus\\BaseCollectionPlus, or null.  '.gettype($humps).' seen.');
 
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        unset($this->_humps);
+        return $camel;
     }
 
     /**
@@ -85,18 +83,6 @@ class Camel
     }
 
     /**
-     * @param string $type
-     * @param string $value
-     * @param array $attributes
-     * @param bool $wrapWithAny
-     * @return IHump
-     */
-    public function newHump($type, $value = '', array $attributes = array(), $wrapWithAny = false)
-    {
-        return new Hump($type, $value, $attributes, $wrapWithAny);
-    }
-
-    /**
      * @param IHump $hump
      * @return $this
      */
@@ -114,15 +100,21 @@ class Camel
     {
         if (is_string($hump))
         {
-            foreach($this->_humps as $h)
+            $this->_humps->rewind();
+            while($this->_humps->valid())
             {
                 /** @var \DCarbone\Camel\Parts\IHump $h */
+                $h = $this->_humps->current();
+
                 if ($h->getType() === $hump)
                 {
                     $hump = $h;
                     break;
                 }
+
+                $this->_humps->next();
             }
+            $this->_humps->rewind();
         }
 
         if ($hump instanceof Hump)
@@ -188,14 +180,16 @@ class Camel
     public function toSoapClientArgumentArray()
     {
         $sxe = $this->getAsSXE();
-        $name = $sxe->getName();
         $array = array($this->_name => array());
 
         foreach($sxe->children() as $element)
         {
             /** @var $element \SimpleXMLElement */
-            $this->parseXML($element, $array[$name]);
+            $this->parseXML($element, $array[$this->_name]);
         }
+
+        $sxe = null;
+        unset($sxe);
 
         return $array;
     }

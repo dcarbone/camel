@@ -37,55 +37,53 @@ class Hump implements IHump
      * @param array $attributes
      * @param bool $wrapWithAny
      * @param array $subHumps
+     * @return \DCarbone\Camel\Parts\Hump
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function __construct($type, $value = null, $attributes = array(), $wrapWithAny = false, $subHumps = array())
+    public static function init($type, $value = null, $attributes = array(), $wrapWithAny = false, $subHumps = array())
     {
         if (!is_string($type))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 1 must be string, '.gettype($type).' seen.');
+            throw new \InvalidArgumentException('Argument 1 must be string, '.gettype($type).' seen.');
 
         if (($type = trim($type)) === '')
-            throw new \RuntimeException(get_class($this).'::__construct - Argument 1 cannot be empty string');
+            throw new \RuntimeException('Argument 1 cannot be empty string');
 
         if ($value !== null && !is_string($value))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 2 must be null or string, '.gettype($value).' seen.');
+            throw new \InvalidArgumentException('Argument 2 must be null or string, '.gettype($value).' seen.');
 
         if ($attributes !== null && !is_array($attributes))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 3 must be null or array, '.gettype($attributes).' seen.');
+            throw new \InvalidArgumentException('Argument 3 must be null or array, '.gettype($attributes).' seen.');
 
         if (!is_bool($wrapWithAny))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 4 must be boolean, '.gettype($wrapWithAny).' seen.');
+            throw new \InvalidArgumentException('Argument 4 must be boolean, '.gettype($wrapWithAny).' seen.');
 
         if ($subHumps !== null && !is_array($subHumps))
-            throw new \InvalidArgumentException(get_class($this).'::__construct - Argument 5 must be null or array, '.gettype($subHumps).' seen.');
+            throw new \InvalidArgumentException('Argument 5 must be null or array, '.gettype($subHumps).' seen.');
 
-        $this->_type = $type;
+        /** @var \DCarbone\Camel\Parts\Hump $hump */
+        $hump = new static;
+
+        $hump->_type = $type;
 
         if (null === $value)
-            $this->_value = '';
+            $hump->_value = '';
         else
-            $this->_value = $value;
+            $hump->_value = $value;
 
         if (null === $attributes)
-            $this->_attributes = array();
+            $hump->_attributes = array();
         else
-            $this->_attributes = $attributes;
+            $hump->_attributes = $attributes;
 
-        $this->_wrapWithAny = $wrapWithAny;
+        $hump->_wrapWithAny = $wrapWithAny;
 
         if (null === $subHumps)
-            $this->_subHumps = new BaseCollectionPlus(array());
+            $hump->_subHumps = new BaseCollectionPlus(array());
         else
-            $this->_subHumps = new BaseCollectionPlus($subHumps);
-    }
+            $hump->_subHumps = new BaseCollectionPlus($subHumps);
 
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        unset($this->_subHumps);
+        return $hump;
     }
 
     /**
