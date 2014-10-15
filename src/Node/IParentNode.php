@@ -9,6 +9,11 @@ interface IParentNode
     /**
      * @return array
      */
+    public function children();
+
+    /**
+     * @return array
+     */
     public function getValidChildren();
 
     /**

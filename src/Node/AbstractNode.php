@@ -110,9 +110,23 @@ abstract class AbstractNode implements INode
             $xml .= " {$k}=\"{$v}\"";
         }
 
-        if ($this instanceof IValueNode)
-            return $xml.">{$this->getNodeTextValue()}</{$nodeName}>\n";
+        if (!($this instanceof IParentNode) && !($this instanceof IValueNode))
+            return $xml." />\n";
 
-        return $xml." />\n";
+        $xml .= ">\n";
+
+        if ($this instanceof IValueNode)
+            $xml .= $this->getNodeTextValue();
+
+        if ($this instanceof IParentNode)
+        {
+            foreach($this->children() as $node)
+            {
+                /** @var \DCarbone\Camel\Node\INode $node */
+                $xml .= (string)$node;
+            }
+        }
+
+        return $xml .= "</{$nodeName}>\n";
     }
 }
