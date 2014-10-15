@@ -42,4 +42,29 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
             implode('", "', $this->getValidChildren())
         ));
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $nodeName = $this->nodeName();
+
+        $xml = "<{$nodeName}";
+
+        foreach($this->outputAttributeMap as $k=>$v)
+        {
+            $xml .= " {$k}=\"{$v}\"";
+        }
+
+        $xml .= ">\n";
+
+        foreach($this->children as $node)
+        {
+            /** @var \DCarbone\Camel\Node\INode $node */
+            $xml .= (string)$node;
+        }
+
+        return $xml."</{$nodeName}>\n";
+    }
 }
