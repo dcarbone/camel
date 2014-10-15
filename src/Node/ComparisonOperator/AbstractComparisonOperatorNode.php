@@ -1,10 +1,15 @@
-<?php namespace DCarbone\Camel\Node;
+<?php namespace DCarbone\Camel\Node\ComparisonOperator;
+
+use DCarbone\Camel\Node\AbstractParentNode;
+use DCarbone\Camel\Node\FieldRef;
+use DCarbone\Camel\Node\Value;
+use DCarbone\Camel\Node\XML;
 
 /**
- * Class Eq
- * @package DCarbone\Camel\Node
+ * Class AbstractComparisonOperatorNode
+ * @package DCarbone\Camel\Node\ComparisonOperator
  */
-class Eq extends AbstractOperatorNode
+abstract class AbstractComparisonOperatorNode extends AbstractParentNode
 {
     /**
      * Constructor
@@ -13,8 +18,6 @@ class Eq extends AbstractOperatorNode
     {
         $this->validParents = array(
             'And',
-            'Expr1',
-            'Expr2',
             'Or',
             'Where',
         );
@@ -54,13 +57,5 @@ class Eq extends AbstractOperatorNode
         $node = new XML();
         $this->append($node);
         return end($this->children);
-    }
-
-    /**
-     * @return string
-     */
-    public function nodeName()
-    {
-        return 'Eq';
     }
 }
