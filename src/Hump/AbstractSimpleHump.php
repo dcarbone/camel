@@ -1,12 +1,12 @@
-<?php namespace DCarbone\Camel\Part;
+<?php namespace DCarbone\Camel\Hump;
 
 use DCarbone\Camel\Node\INode;
 
 /**
- * Class AbstractSimplePart
- * @package DCarbone\Camel\Part
+ * Class AbstractSimpleHump
+ * @package DCarbone\Camel\Hump
  */
-abstract class AbstractSimplePart extends AbstractPart
+abstract class AbstractSimpleHump extends AbstractHump
 {
     /** @var array */
     protected $children = array();

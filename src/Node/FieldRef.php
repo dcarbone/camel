@@ -4,7 +4,7 @@
  * Class FieldRef
  * @package DCarbone\Camel\Node
  *
- * @link http://msdn.microsoft.com/en-us/library/office/ms442728(v=office.15).aspx
+ * http://msdn.microsoft.com/en-us/library/office/ms442728(v=office.15).aspx
  */
 class FieldRef extends AbstractNode
 {

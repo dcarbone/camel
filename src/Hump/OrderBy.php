@@ -1,13 +1,15 @@
-<?php namespace DCarbone\Camel\Part;
+<?php namespace DCarbone\Camel\Hump;
 
 use DCarbone\Camel\Camel;
 use DCarbone\Camel\Node\FieldRef;
 
 /**
  * Class OrderBy
- * @package DCarbone\Camel\Part
+ * @package DCarbone\Camel\Hump
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms467378(v=office.15).aspx
  */
-class OrderBy extends AbstractSimplePart
+class OrderBy extends AbstractSimpleHump
 {
     /** @var bool */
     protected $override = false;

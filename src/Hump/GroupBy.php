@@ -1,13 +1,15 @@
-<?php namespace DCarbone\Camel\Part;
+<?php namespace DCarbone\Camel\Hump;
 
 use DCarbone\Camel\Camel;
 use DCarbone\Camel\Node\FieldRef;
 
 /**
  * Class GroupBy
- * @package DCarbone\Camel\Part\Query
+ * @package DCarbone\Camel\Hump\Query
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms415157(v=office.15).aspx
  */
-class GroupBy extends AbstractSimplePart
+class GroupBy extends AbstractSimpleHump
 {
     /** @var bool */
     protected $collapse = false;
@@ -63,7 +65,7 @@ class GroupBy extends AbstractSimplePart
      */
     public function __toString()
     {
-        $xml = '<GroupBy Collapse="'.($this->collapse ? 'TRUE' : 'FALSE').'" />'."\n";
+        $xml = '<GroupBy Collapse="'.($this->collapse ? 'TRUE' : 'FALSE').'">'."\n";
 
         foreach($this->children as $field)
         {

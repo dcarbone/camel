@@ -1,6 +1,6 @@
 <?php namespace DCarbone\Camel\Node;
 
-use DCarbone\Camel\Part\AbstractPart;
+use DCarbone\Camel\Hump\AbstractHump;
 
 /**
  * Class AbstractNode
@@ -21,14 +21,14 @@ abstract class AbstractNode implements INode
     protected $validAttributeMap = array();
 
     /**
-     * @param INode|AbstractPart $parent
+     * @param INode|AbstractHump $parent
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setParent($parent)
     {
-        if (!($parent instanceof AbstractPart) && !($parent instanceof INode))
-            throw new \InvalidArgumentException('Argument 1 expected to be instance of AbstractPart or INode.');
+        if (!($parent instanceof AbstractHump) && !($parent instanceof INode))
+            throw new \InvalidArgumentException('Argument 1 expected to be instance of AbstractHump or INode.');
 
         if (in_array($parent->nodeName(), $this->getValidParents(), true))
         {
@@ -101,7 +101,9 @@ abstract class AbstractNode implements INode
      */
     public function __toString()
     {
-        $xml = "<{$this->nodeName()}";
+        $nodeName = $this->nodeName();
+
+        $xml = "<{$nodeName}";
 
         foreach($this->outputAttributeMap as $k=>$v)
         {
@@ -109,7 +111,7 @@ abstract class AbstractNode implements INode
         }
 
         if ($this instanceof IValueNode)
-            return $xml.">{$this->getNodeTextValue()}</{$this->nodeName()}>\n";
+            return $xml.">{$this->getNodeTextValue()}</{$nodeName}>\n";
 
         return $xml." />\n";
     }

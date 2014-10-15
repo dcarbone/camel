@@ -1,12 +1,12 @@
-<?php namespace DCarbone\Camel\Part;
+<?php namespace DCarbone\Camel\Hump;
 
 use DCarbone\Camel\Camel;
 
 /**
- * Class AbstractPart
- * @package DCarbone\Camel\Part
+ * Class AbstractHump
+ * @package DCarbone\Camel\Hump
  */
-abstract class AbstractPart
+abstract class AbstractHump
 {
     /** @var \DCarbone\Camel\Camel */
     protected $camel;

@@ -1,22 +1,24 @@
 <?php namespace DCarbone\Camel;
 
-use DCarbone\Camel\Part\GroupBy;
-use DCarbone\Camel\Part\OrderBy;
-use DCarbone\Camel\Part\Where;
+use DCarbone\Camel\Hump\GroupBy;
+use DCarbone\Camel\Hump\OrderBy;
+use DCarbone\Camel\Hump\Where;
 
 /**
  * Class Camel
  * @package DCarbone\Camel
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms467521(v=office.15).aspx
  */
 class Camel
 {
-    /** @var \DCarbone\Camel\Part\Where */
+    /** @var \DCarbone\Camel\Hump\Where */
     protected $where;
 
-    /** @var \DCarbone\Camel\Part\OrderBy */
+    /** @var \DCarbone\Camel\Hump\OrderBy */
     protected $orderBy;
 
-    /** @var \DCarbone\Camel\Part\GroupBy */
+    /** @var \DCarbone\Camel\Hump\GroupBy */
     protected $groupBy;
 
     /**
@@ -42,7 +44,7 @@ class Camel
     }
 
     /**
-     * @return \DCarbone\Camel\Part\GroupBy
+     * @return \DCarbone\Camel\Hump\GroupBy
      */
     public function groupBy()
     {

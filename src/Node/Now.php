@@ -1,6 +1,6 @@
 <?php namespace DCarbone\Camel\Node;
 
-use DCarbone\Camel\Part\AbstractPart;
+use DCarbone\Camel\Hump\AbstractHump;
 
 /**
  * Class Now
@@ -17,14 +17,14 @@ class Now extends AbstractNode
     }
 
     /**
-     * @param INode|AbstractPart $parent
+     * @param INode|AbstractHump $parent
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setParent($parent)
     {
-        if (!($parent instanceof AbstractPart) && !($parent instanceof INode))
-            throw new \InvalidArgumentException('Argument 1 expected to be instance of AbstractPart or INode.');
+        if (!($parent instanceof AbstractHump) && !($parent instanceof INode))
+            throw new \InvalidArgumentException('Argument 1 expected to be instance of AbstractHump or INode.');
 
         $this->parent = $parent;
         return $this;
