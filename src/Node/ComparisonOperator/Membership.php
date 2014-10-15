@@ -11,6 +11,8 @@ class Membership extends AbstractComparisonOperatorNode
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->validAttributeMap = array(
             'type' => 'Type',
         );

@@ -36,6 +36,7 @@ class Where extends AbstractHump
             'in'                => 'In',
             'isnotnull'         => 'IsNotNull',
             'isnull'            => 'IsNull',
+            'includes'          => 'Includes',
             'leq'               => 'Leq',
             'lt'                => 'Lt',
             'membership'        => 'Membership',
@@ -55,6 +56,7 @@ class Where extends AbstractHump
             'In'                => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\In',
             'IsNotNull'         => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\IsNotNull',
             'IsNull'            => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\IsNull',
+            'Includes'          => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\Includes',
             'Leq'               => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\Leq',
             'Lt'                => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\Lt',
             'Membership'        => '\\DCarbone\\Camel\\Node\\ComparisonOperator\\Membership',
@@ -99,6 +101,14 @@ class Where extends AbstractHump
     public function andNode()
     {
         return $this->root('and');
+    }
+
+    /**
+     * @return \DCarbone\Camel\Node\LogicalJoin\OrNode
+     */
+    public function orNode()
+    {
+        return $this->root('or');
     }
 
     /**
@@ -219,14 +229,6 @@ class Where extends AbstractHump
     public function notIncludes()
     {
         return $this->root('notincludes');
-    }
-
-    /**
-     * @return \DCarbone\Camel\Node\LogicalJoin\OrNode
-     */
-    public function orNode()
-    {
-        return $this->root('or');
     }
 
     /**
