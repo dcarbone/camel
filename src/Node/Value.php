@@ -128,10 +128,9 @@ class Value extends AbstractParentNode implements IValueNode
      */
     public function setNodeTextValue($value)
     {
-        if (!is_string($value))
-            throw new \InvalidArgumentException('Argument 1 expected to be string, '.gettype($value).' seen.');
+        $this->value = (string)$value;
 
-        $this->value = $value;
+        return $this;
     }
 
     /**
