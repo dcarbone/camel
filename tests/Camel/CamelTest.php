@@ -19,7 +19,6 @@ class CamelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Hump\AbstractHump::__construct
      * @covers \DCarbone\Camel\Hump\OrderBy::__construct
      * @covers \DCarbone\Camel\Camel::orderBy
      * @uses \DCarbone\Camel\Camel
@@ -36,7 +35,6 @@ class CamelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Hump\AbstractHump::__construct
      * @covers \DCarbone\Camel\Hump\GroupBy::__construct
      * @covers \DCarbone\Camel\Camel::groupBy
      * @uses \DCarbone\Camel\Hump\AbstractHump
@@ -53,7 +51,6 @@ class CamelTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Hump\AbstractHump::__construct
      * @covers \DCarbone\Camel\Hump\Where::__construct
      * @covers \DCarbone\Camel\Camel::where
      * @uses \DCarbone\Camel\Hump\AbstractHump

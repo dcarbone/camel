@@ -7,7 +7,6 @@ class GroupByTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers \DCarbone\Camel\Camel::orderBy
-     * @covers \DCarbone\Camel\Hump\AbstractHump::__construct
      * @covers \DCarbone\Camel\Hump\GroupBy::__construct
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Hump\AbstractHump

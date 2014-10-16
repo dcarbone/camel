@@ -7,7 +7,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers \DCarbone\Camel\Camel::where
-     * @covers \DCarbone\Camel\Hump\AbstractHump::__construct
      * @covers \DCarbone\Camel\Hump\Where::__construct
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Hump\AbstractHump
