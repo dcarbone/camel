@@ -12,6 +12,11 @@
         syntaxCheck="true"
         >
 
+    <testsuite name="Node">
+        <directory>./tests/Node</directory>
+        <exclude>./tests/misc</exclude>
+    </testsuite>
+
     <testsuite name="Hump">
         <directory>./tests/Hump</directory>
         <exclude>./tests/misc</exclude>
