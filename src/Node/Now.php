@@ -5,6 +5,8 @@ use DCarbone\Camel\Hump\AbstractHump;
 /**
  * Class Now
  * @package DCarbone\Camel\Node
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms461651(v=office.15).aspx
  */
 class Now extends AbstractNode
 {

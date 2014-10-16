@@ -3,6 +3,8 @@
 /**
  * Class Eq
  * @package DCarbone\Camel\Node\ComparisonOperator
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms479601(v=office.15).aspx
  */
 class Eq extends AbstractComparisonOperatorNode
 {

@@ -3,6 +3,8 @@
 /**
  * Class Geq
  * @package DCarbone\Camel\Node\ComparisonOperator
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms416296(v=office.15).aspx
  */
 class Geq extends AbstractComparisonOperatorNode
 {

@@ -3,6 +3,8 @@
 /**
  * Class XML
  * @package DCarbone\Camel\Node
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms480514(v=office.15).aspx
  */
 class XML extends AbstractNode implements IValueNode
 {

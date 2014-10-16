@@ -3,6 +3,8 @@
 /**
  * Class UserID
  * @package DCarbone\Camel\Node
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ff625789(v=office.15).aspx
  */
 class UserID extends AbstractNode implements IValueNode
 {

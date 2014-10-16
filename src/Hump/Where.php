@@ -6,6 +6,8 @@ use DCarbone\Camel\Node\INode;
 /**
  * Class Where
  * @package DCarbone\Camel\Hump
+ *
+ * http://msdn.microsoft.com/en-us/library/office/ms414805(v=office.15).aspx
  */
 class Where extends AbstractHump
 {
