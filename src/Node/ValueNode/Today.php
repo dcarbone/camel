@@ -1,4 +1,4 @@
-<?php namespace DCarbone\Camel\Node;
+<?php namespace DCarbone\Camel\Node\ValueNode;
 
 /**
  * Class Today
@@ -6,7 +6,7 @@
  *
  * http://msdn.microsoft.com/en-us/library/office/ms460496(v=office.15).aspx
  */
-class Today extends AbstractNode
+class Today extends AbstractValueNode
 {
     /**
      * Constructor

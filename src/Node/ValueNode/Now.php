@@ -1,6 +1,7 @@
-<?php namespace DCarbone\Camel\Node;
+<?php namespace DCarbone\Camel\Node\ValueNode;
 
 use DCarbone\Camel\Hump\AbstractHump;
+use DCarbone\Camel\Node\INode;
 
 /**
  * Class Now
@@ -8,7 +9,7 @@ use DCarbone\Camel\Hump\AbstractHump;
  *
  * http://msdn.microsoft.com/en-us/library/office/ms461651(v=office.15).aspx
  */
-class Now extends AbstractNode
+class Now extends AbstractValueNode
 {
     /**
      * @return string

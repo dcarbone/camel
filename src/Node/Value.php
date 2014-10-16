@@ -1,5 +1,12 @@
 <?php namespace DCarbone\Camel\Node;
 
+use DCarbone\Camel\Node\ValueNode\ListProperty;
+use DCarbone\Camel\Node\ValueNode\Month;
+use DCarbone\Camel\Node\ValueNode\Now;
+use DCarbone\Camel\Node\ValueNode\Today;
+use DCarbone\Camel\Node\ValueNode\UserID;
+use DCarbone\Camel\Node\ValueNode\XML;
+
 /**
  * Class Value
  * @package DCarbone\Camel\Node
@@ -7,7 +14,7 @@
 class Value extends AbstractParentNode implements IValueNode
 {
     /** @var string */
-    protected $value = '';
+    protected $nodeValue = '';
 
     /**
      * Constructor
@@ -120,15 +127,12 @@ class Value extends AbstractParentNode implements IValueNode
     }
 
     /**
-     * Set text value on this node
-     *
      * @param string $value
-     * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setNodeTextValue($value)
+    public function nodeValue($value)
     {
-        $this->value = (string)$value;
+        $this->nodeValue = (string)$value;
 
         return $this;
     }
@@ -136,8 +140,8 @@ class Value extends AbstractParentNode implements IValueNode
     /**
      * @return string
      */
-    public function getNodeTextValue()
+    public function getNodeValue()
     {
-        return $this->value;
+        return $this->nodeValue;
     }
 }

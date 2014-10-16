@@ -64,7 +64,6 @@ class GroupByTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractSimpleHump
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @uses \DCarbone\Camel\Node\INode
      * @depends testCanGetGroupByInstance
      * @param \DCarbone\Camel\Hump\GroupBy $groupBy
      */
@@ -86,7 +85,6 @@ class GroupByTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\GroupBy
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @uses \DCarbone\Camel\Node\INode
      * @depends testCanGetGroupByInstance
      * @param \DCarbone\Camel\Hump\GroupBy $groupBy
      */

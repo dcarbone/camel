@@ -77,7 +77,6 @@ class OrderByTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractSimpleHump
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @uses \DCarbone\Camel\Node\INode
      * @depends testCanGetOrderByInstance
      * @param \DCarbone\Camel\Hump\OrderBy $orderBy
      */
@@ -99,7 +98,6 @@ class OrderByTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\OrderBy
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @uses \DCarbone\Camel\Node\INode
      * @depends testCanGetOrderByInstance
      * @param \DCarbone\Camel\Hump\OrderBy $orderBy
      */

@@ -7,15 +7,13 @@
 interface IValueNode
 {
     /**
-     * Set text value on this node
-     *
      * @param string $value
      * @return $this
      */
-    public function setNodeTextValue($value);
+    public function nodeValue($value);
 
     /**
      * @return string
      */
-    public function getNodeTextValue();
+    public function getNodeValue();
 }

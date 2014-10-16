@@ -116,7 +116,7 @@ abstract class AbstractNode implements INode
         $xml .= ">";
 
         if ($this instanceof IValueNode)
-            $xml .= $this->getNodeTextValue();
+            $xml .= $this->getNodeValue();
 
         if ($this instanceof IParentNode)
         {

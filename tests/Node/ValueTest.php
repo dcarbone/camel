@@ -34,19 +34,19 @@ class ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\Value::setNodeTextValue
-     * @covers \DCarbone\Camel\Node\Value::getNodeTextValue
+     * @covers \DCarbone\Camel\Node\Value::nodeValue
+     * @covers \DCarbone\Camel\Node\Value::getNodeValue
      * @uses \DCarbone\Camel\Node\Value
      * @depends testCanInitializeNode
      * @param \DCarbone\Camel\Node\Value $value
      */
     public function testCanSetNodeTextValue(\DCarbone\Camel\Node\Value $value)
     {
-        $ret = $value->setNodeTextValue('TestValue');
+        $ret = $value->nodeValue('TestValue');
 
         $this->assertSame($value, $ret);
 
-        $textValue = $value->getNodeTextValue();
+        $textValue = $value->getNodeValue();
 
         $this->assertInternalType('string', $textValue);
         $this->assertEquals('TestValue', $textValue);
@@ -82,7 +82,7 @@ class ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValueAttributes
+     * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
      * @uses \DCarbone\Camel\Node\Value
      * @depends testCanInitializeNode
      * @param \DCarbone\Camel\Node\Value $value
@@ -115,6 +115,102 @@ class ValueTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Today', $children);
         $this->assertContains('UserID', $children);
         $this->assertContains('XML', $children);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::month
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\ValueNode\Month
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateMonthChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $month = $value->month();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Month', $month);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::now
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\ValueNode\Now
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateNowChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $now = $value->now();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Now', $now);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::listProperty
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateListPropertyChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $listProperty = $value->listProperty();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\ListProperty', $listProperty);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::today
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\ValueNode\Today
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateTodayChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $today = $value->today();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Today', $today);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::userID
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\ValueNode\UserID
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateUserIDChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $userID = $value->userID();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\UserID', $userID);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\Value::xml
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::append
+     * @uses \DCarbone\Camel\Node\ValueNode\XML
+     * @uses \DCarbone\Camel\Node\Value
+     * @uses \DCarbone\Camel\Node\AbstractParentNode
+     * @depends testCanInitializeNode
+     * @param \DCarbone\Camel\Node\Value $value
+     */
+    public function testCanCreateXMLChild(\DCarbone\Camel\Node\Value $value)
+    {
+        $xml = $value->xml();
+
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\XML', $xml);
     }
 }
  

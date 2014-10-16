@@ -1,4 +1,4 @@
-<?php namespace DCarbone\Camel\Node;
+<?php namespace DCarbone\Camel\Node\ValueNode;
 
 /**
  * Class XML
@@ -6,11 +6,8 @@
  *
  * http://msdn.microsoft.com/en-us/library/office/ms480514(v=office.15).aspx
  */
-class XML extends AbstractNode implements IValueNode
+class XML extends AbstractValueNode
 {
-    /** @var string */
-    protected $value = '';
-
     /**
      * Constructor
      */
@@ -41,26 +38,5 @@ class XML extends AbstractNode implements IValueNode
     public function nodeName()
     {
         return 'XML';
-    }
-
-    /**
-     * Set text value on this node
-     *
-     * @param string $value
-     * @return $this
-     */
-    public function setNodeTextValue($value)
-    {
-        $this->value = (string)$value;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNodeTextValue()
-    {
-        return $this->value;
     }
 }

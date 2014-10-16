@@ -82,8 +82,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\AbstractParentNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
-     * @uses \DCarbone\Camel\Node\INode
-     * @uses \DCarbone\Camel\Node\IParentNode
      * @return \DCarbone\Camel\Hump\Where
      */
     public function testCanSetRootNode()
@@ -133,7 +131,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\AbstractParentNode
      * @uses \DCarbone\Camel\Node\IParentNode
      * @uses \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode
@@ -156,7 +153,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Camel
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\AbstractParentNode
      * @uses \DCarbone\Camel\Node\IParentNode
      * @uses \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode
@@ -179,7 +175,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\BeginsWith
      */
@@ -200,7 +195,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Contains
      */
@@ -221,7 +215,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\DateRangesOverlap
      */
@@ -242,7 +235,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Eq
      */
@@ -263,7 +255,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Geq
      */
@@ -284,7 +275,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Gt
      */
@@ -305,7 +295,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\In
      */
@@ -326,7 +315,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Includes
      */
@@ -347,7 +335,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\IsNotNull
      */
@@ -368,7 +355,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\IsNull
      */
@@ -389,7 +375,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Leq
      */
@@ -410,7 +395,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Lt
      */
@@ -431,7 +415,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Membership
      */
@@ -452,7 +435,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\Neq
      */
@@ -473,7 +455,6 @@ class WhereTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Hump\AbstractHump
      * @uses \DCarbone\Camel\Hump\Where
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\INode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode
      * @uses \DCarbone\Camel\Node\ComparisonOperator\NotIncludes
      */

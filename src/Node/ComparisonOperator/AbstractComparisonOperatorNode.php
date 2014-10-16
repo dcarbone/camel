@@ -3,7 +3,7 @@
 use DCarbone\Camel\Node\AbstractParentNode;
 use DCarbone\Camel\Node\FieldRef;
 use DCarbone\Camel\Node\Value;
-use DCarbone\Camel\Node\XML;
+use DCarbone\Camel\Node\ValueNode\XML;
 
 /**
  * Class AbstractComparisonOperatorNode
@@ -50,7 +50,7 @@ abstract class AbstractComparisonOperatorNode extends AbstractParentNode
     }
 
     /**
-     * @return XML
+     * @return \DCarbone\Camel\Node\ValueNode\XML
      */
     public function xml()
     {

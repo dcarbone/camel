@@ -6,27 +6,27 @@
 class ListPropertyTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \DCarbone\Camel\Node\ListProperty::__construct
-     * @uses \DCarbone\Camel\Node\ListProperty
+     * @covers \DCarbone\Camel\Node\ValueNode\ListProperty::__construct
+     * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @return \DCarbone\Camel\Node\ListProperty
+     * @return \DCarbone\Camel\Node\ValueNode\ListProperty
      */
     public function testCanInitializeNode()
     {
-        $listProperty = new \DCarbone\Camel\Node\ListProperty();
+        $listProperty = new \DCarbone\Camel\Node\ValueNode\ListProperty();
 
-        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ListProperty', $listProperty);
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\ListProperty', $listProperty);
 
         return $listProperty;
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\ListProperty::nodeName
-     * @uses \DCarbone\Camel\Node\ListProperty
+     * @covers \DCarbone\Camel\Node\ValueNode\ListProperty::nodeName
+     * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @depends testCanInitializeNode
-     * @param \DCarbone\Camel\Node\ListProperty $listProperty
+     * @param \DCarbone\Camel\Node\ValueNode\ListProperty $listProperty
      */
-    public function testCanGetNodeName(\DCarbone\Camel\Node\ListProperty $listProperty)
+    public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
         $name = $listProperty->nodeName();
 
@@ -38,11 +38,11 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\ListProperty
+     * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @depends testCanInitializeNode
-     * @param \DCarbone\Camel\Node\ListProperty $listProperty
+     * @param \DCarbone\Camel\Node\ValueNode\ListProperty $listProperty
      */
-    public function testCanGetAttributeMap(\DCarbone\Camel\Node\ListProperty $listProperty)
+    public function testCanGetAttributeMap(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
         $attributes = $listProperty->getValidAttributes();
 
@@ -63,11 +63,11 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\ListProperty
+     * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @depends testCanInitializeNode
-     * @param \DCarbone\Camel\Node\ListProperty $listProperty
+     * @param \DCarbone\Camel\Node\ValueNode\ListProperty $listProperty
      */
-    public function testCanGetValidParents(\DCarbone\Camel\Node\ListProperty $listProperty)
+    public function testCanGetValidParents(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
         $parents = $listProperty->getValidParents();
 

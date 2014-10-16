@@ -7,26 +7,26 @@ class NowTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\Now
-     * @return \DCarbone\Camel\Node\Now
+     * @uses \DCarbone\Camel\Node\ValueNode\Now
+     * @return \DCarbone\Camel\Node\ValueNode\Now
      */
     public function testCanInitializeNode()
     {
-        $now = new \DCarbone\Camel\Node\Now();
+        $now = new \DCarbone\Camel\Node\ValueNode\Now();
 
-        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\Now', $now);
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Now', $now);
 
         return $now;
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\Now::nodeName
-     * @uses \DCarbone\Camel\Node\Now
+     * @covers \DCarbone\Camel\Node\ValueNode\Now::nodeName
+     * @uses \DCarbone\Camel\Node\ValueNode\Now
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @depends testCanInitializeNode
-     * @param \DCarbone\Camel\Node\Now $now
+     * @param \DCarbone\Camel\Node\ValueNode\Now $now
      */
-    public function testCanGetNodeName(\DCarbone\Camel\Node\Now $now)
+    public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\Now $now)
     {
         $name = $now->nodeName();
 
