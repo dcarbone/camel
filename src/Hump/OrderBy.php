@@ -1,6 +1,5 @@
 <?php namespace DCarbone\Camel\Hump;
 
-use DCarbone\Camel\Camel;
 use DCarbone\Camel\Node\FieldRef;
 
 /**
@@ -19,13 +18,9 @@ class OrderBy extends AbstractSimpleHump
 
     /**
      * Constructor
-     *
-     * @param Camel $camel
      */
-    public function __construct(Camel $camel)
+    public function __construct()
     {
-        parent::__construct($camel);
-
         $this->validChildren = array('FieldRef');
     }
 

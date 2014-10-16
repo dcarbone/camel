@@ -22,14 +22,38 @@ class Camel
     protected $groupBy;
 
     /**
+     * Clear all resources
+     */
+    public function clear()
+    {
+        unset($this->where);
+        unset($this->orderBy);
+        unset($this->groupBy);
+    }
+
+    /**
      * @return Where
      */
     public function where()
     {
         if (!isset($this->where))
-            $this->where = new Where($this);
+        {
+            $this->where = new Where();
+            $this->where->setCamel($this);
+        }
 
         return $this->where;
+    }
+
+    /**
+     * @param Where $where
+     * @return $this
+     */
+    public function setWhere(Where $where)
+    {
+        $this->where = $where;
+
+        return $this;
     }
 
     /**
@@ -38,9 +62,23 @@ class Camel
     public function orderBy()
     {
         if (!isset($this->orderBy))
-            $this->orderBy = new OrderBy($this);
+        {
+            $this->orderBy = new OrderBy();
+            $this->orderBy->setCamel($this);
+        }
 
         return $this->orderBy;
+    }
+
+    /**
+     * @param OrderBy $orderBy
+     * @return $this
+     */
+    public function setOrderBy(OrderBy $orderBy)
+    {
+        $this->orderBy = $orderBy;
+
+        return $this;
     }
 
     /**
@@ -49,9 +87,23 @@ class Camel
     public function groupBy()
     {
         if (!isset($this->groupBy))
-            $this->groupBy = new GroupBy($this);
+        {
+            $this->groupBy = new GroupBy();
+            $this->groupBy->setCamel($this);
+        }
 
         return $this->groupBy;
+    }
+
+    /**
+     * @param GroupBy $groupBy
+     * @return $this
+     */
+    public function setGroupBy(GroupBy $groupBy)
+    {
+        $this->groupBy = $groupBy;
+
+        return $this;
     }
 
     /**

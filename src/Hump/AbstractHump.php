@@ -16,10 +16,13 @@ abstract class AbstractHump
 
     /**
      * @param Camel $camel
+     * @return $this
      */
-    public function __construct(Camel $camel)
+    public function setCamel(Camel $camel)
     {
         $this->camel = $camel;
+
+        return $this;
     }
 
     /**
@@ -36,10 +39,14 @@ abstract class AbstractHump
     abstract public function nodeName();
 
     /**
+     * @throws \LogicException
      * @return Camel
      */
     public function end()
     {
+        if (!isset($this->camel))
+            throw new \LogicException('Cannot call "end" as the Camel this Hump belongs to is not defined.');
+
         return $this->camel;
     }
 
