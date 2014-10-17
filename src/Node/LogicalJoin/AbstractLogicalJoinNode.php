@@ -222,7 +222,7 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
     public function append(INode $node)
     {
         if (count($this->children) >= 2)
-            throw new \LogicException('Operator Nodes cannot have more than 2 children.');
+            throw new \LogicException('Logical Join Nodes cannot have more than 2 children.');
 
         return parent::append($node);
     }
