@@ -30,7 +30,6 @@ interface INode
     /**
      * @param $name
      * @param string $value
-     * @internal param string $attribute
      * @return $this
      */
     public function attribute($name, $value);
