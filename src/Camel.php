@@ -52,6 +52,7 @@ class Camel
     public function setWhere(Where $where)
     {
         $this->where = $where;
+        $this->where->setCamel($this);
 
         return $this;
     }
@@ -77,6 +78,7 @@ class Camel
     public function setOrderBy(OrderBy $orderBy)
     {
         $this->orderBy = $orderBy;
+        $this->orderBy->setCamel($this);
 
         return $this;
     }
@@ -102,6 +104,7 @@ class Camel
     public function setGroupBy(GroupBy $groupBy)
     {
         $this->groupBy = $groupBy;
+        $this->groupBy->setCamel($this);
 
         return $this;
     }
