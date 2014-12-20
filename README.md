@@ -91,7 +91,7 @@ Lets say you have a SharePoint list that looks somewhat like this:
 | Krystal | 29 | Female | Genetics Researcher |
 | Elizabeth | 25 | Female | Project Manager |
 | David | 59 | Male | Oncologist |
-| Beatrice | 22 Female | Med Student |
+| Beatrice | 22 | Female | Med Student |
 | Anna | 20 | Female | Retail |
 
 And you want to get all the females back.  You could do something like this:
