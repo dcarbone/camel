@@ -2,7 +2,6 @@
 
 use DCarbone\Camel\Node\AbstractParentNode;
 use DCarbone\Camel\Node\ComparisonOperator as Comparator;
-use DCarbone\Camel\Node\INode;
 
 /**
  * Class AbstractLogicalJoinNode
@@ -42,6 +41,22 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
             'NotIncludes',
             'Or',
         );
+    }
+
+    /**
+     * @return int
+     */
+    public function minimumChildren()
+    {
+        return 2;
+    }
+
+    /**
+     * @return int
+     */
+    public function maximumChildren()
+    {
+        return 2;
     }
 
     /**
@@ -127,7 +142,7 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
     /**
      * @return Comparator\In
      */
-    public function In()
+    public function in()
     {
         $node = new Comparator\In();
         $this->append($node);
@@ -212,18 +227,5 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
         $node = new Comparator\NotIncludes();
         $this->append($node);
         return end($this->children);
-    }
-
-    /**
-     * @param INode $node
-     * @throws \LogicException
-     * @return $this
-     */
-    public function append(INode $node)
-    {
-        if (count($this->children) >= 2)
-            throw new \LogicException('Logical Join Nodes cannot have more than 2 children.');
-
-        return parent::append($node);
     }
 }

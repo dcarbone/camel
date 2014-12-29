@@ -7,13 +7,10 @@ class AndNodeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::__construct
-     * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\AbstractParentNode
-     * @uses \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode
      * @uses \DCarbone\Camel\Node\LogicalJoin\AndNode
-     * @returns \DCarbone\Camel\Node\logicalJoin\AndNode
+     * @returns \DCarbone\Camel\Node\LogicalJoin\AndNode
      */
-    public function testCanInitializeNode()
+    public function testCanInitializeAndNode()
     {
         $andNode = new \DCarbone\Camel\Node\LogicalJoin\AndNode();
 
@@ -25,10 +22,10 @@ class AndNodeTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AndNode::nodeName
      * @uses \DCarbone\Camel\Node\LogicalJoin\AndNode
-     * @depends testCanInitializeNode
+     * @depends testCanInitializeAndNode
      * @param \DCarbone\Camel\Node\LogicalJoin\AndNode $andNode
      */
-    public function testCanGetNodeName(\DCarbone\Camel\Node\LogicalJoin\AndNode $andNode)
+    public function testCanGetAndNodeName(\DCarbone\Camel\Node\LogicalJoin\AndNode $andNode)
     {
         $name = $andNode->nodeName();
 
@@ -36,4 +33,3 @@ class AndNodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('And', $name);
     }
 }
- 

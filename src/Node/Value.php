@@ -53,6 +53,22 @@ class Value extends AbstractParentNode implements IValueNode
     }
 
     /**
+     * @return int
+     */
+    public function minimumChildren()
+    {
+        return -1;
+    }
+
+    /**
+     * @return int
+     */
+    public function maximumChildren()
+    {
+        return -1;
+    }
+
+    /**
      * @return ListProperty
      */
     public function listProperty()

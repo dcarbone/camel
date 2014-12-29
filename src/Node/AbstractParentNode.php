@@ -37,6 +37,13 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
     {
         if (in_array($node->nodeName(), $this->validChildren))
         {
+            $max = $this->maximumChildren();
+
+            if ($max > 0 && count($this->children) >= $max)
+                throw new \LogicException('Node of type "'.$this->nodeName().'" already has it\'s '.
+                    'maximum of "'.$max.'" children.  Cannot append child with definition "'.
+                    (string)$node.'"');
+
             $node->setParent($this);
             $this->children[] = $node;
 

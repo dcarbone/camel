@@ -21,4 +21,14 @@ interface IParentNode
      * @return $this
      */
     public function append(INode $node);
+
+    /**
+     * @return int
+     */
+    public function minimumChildren();
+
+    /**
+     * @return int
+     */
+    public function maximumChildren();
 }

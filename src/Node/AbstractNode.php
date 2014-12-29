@@ -120,6 +120,12 @@ abstract class AbstractNode implements INode
 
         if ($this instanceof IParentNode)
         {
+            $min = $this->minimumChildren();
+
+            if ($min > 0 && ($count = count($this->children())) < $min)
+                throw new \LogicException('Node "'.$this->nodeName().'" must have at least "'.
+                    $min.'" children, only "'.$count.'" seen.  Current node definition: "'.$xml.'"');
+
             foreach($this->children() as $node)
             {
                 /** @var \DCarbone\Camel\Node\INode $node */

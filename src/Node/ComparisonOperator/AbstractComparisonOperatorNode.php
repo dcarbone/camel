@@ -30,6 +30,22 @@ abstract class AbstractComparisonOperatorNode extends AbstractParentNode
     }
 
     /**
+     * @return int
+     */
+    public function minimumChildren()
+    {
+        return -1;
+    }
+
+    /**
+     * @return int
+     */
+    public function maximumChildren()
+    {
+        return -1;
+    }
+
+    /**
      * @return FieldRef
      */
     public function fieldRef()

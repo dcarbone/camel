@@ -7,13 +7,10 @@ class OrNodeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::__construct
-     * @uses \DCarbone\Camel\Node\AbstractNode
-     * @uses \DCarbone\Camel\Node\AbstractParentNode
-     * @uses \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode
-     * @uses \DCarbone\Camel\Node\LogicalJoin\AndNode
+     * @uses \DCarbone\Camel\Node\LogicalJoin\OrNode
      * @return \DCarbone\Camel\Node\LogicalJoin\OrNode
      */
-    public function testCanInitializeNode()
+    public function testCanInitializeOrNode()
     {
         $orNode = new \DCarbone\Camel\Node\LogicalJoin\OrNode();
 
@@ -25,10 +22,10 @@ class OrNodeTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\OrNode::nodeName
      * @uses \DCarbone\Camel\Node\LogicalJoin\OrNode
-     * @depends testCanInitializeNode
+     * @depends testCanInitializeOrNode
      * @param \DCarbone\Camel\Node\LogicalJoin\OrNode $orNode
      */
-    public function testCanGetNodeName(\DCarbone\Camel\Node\LogicalJoin\OrNode $orNode)
+    public function testCanGetOrNodeName(\DCarbone\Camel\Node\LogicalJoin\OrNode $orNode)
     {
         $name = $orNode->nodeName();
 
@@ -36,4 +33,3 @@ class OrNodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Or', $name);
     }
 }
- 
