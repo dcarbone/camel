@@ -76,4 +76,45 @@ class AbstractComparisonOperatorNodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(-1, $min);
     }
 
+    /**
+     * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::fieldRef
+     * @uses \DCarbone\Camel\Node\FieldRef
+     */
+    public function testCanAppendFieldRefNode()
+    {
+        $leq = new \DCarbone\Camel\Node\ComparisonOperator\Leq();
+        $leq->fieldRef();
+        $children = $leq->children();
+        $this->assertInternalType('array', $children);
+        $this->assertCount(1, $children);
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\FieldRef', $children[0]);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::value
+     * @uses \DCarbone\Camel\Node\Value
+     */
+    public function testCanAppendValueNode()
+    {
+        $leq = new \DCarbone\Camel\Node\ComparisonOperator\Leq();
+        $leq->value();
+        $children = $leq->children();
+        $this->assertInternalType('array', $children);
+        $this->assertCount(1, $children);
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\Value', $children[0]);
+    }
+
+    /**
+     * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::xml
+     * @uses \DCarbone\Camel\Node\ValueNode\XML
+     */
+    public function testCanAppendXMLNode()
+    {
+        $leq = new \DCarbone\Camel\Node\ComparisonOperator\Leq();
+        $leq->xml();
+        $children = $leq->children();
+        $this->assertInternalType('array', $children);
+        $this->assertCount(1, $children);
+        $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\XML', $children[0]);
+    }
 }
