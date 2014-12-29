@@ -10,7 +10,7 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
     protected $children = array();
 
     /** @var array */
-    protected $validChildren = array();
+    protected $allowableChildren = array();
 
     /**
      * @return array
@@ -23,9 +23,9 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
     /**
      * @return array
      */
-    public function getValidChildren()
+    public function getAllowableChildren()
     {
-        return $this->validChildren;
+        return $this->allowableChildren;
     }
 
     /**
@@ -35,7 +35,7 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
      */
     public function append(INode $node)
     {
-        if (in_array($node->nodeName(), $this->validChildren))
+        if (in_array($node->nodeName(), $this->allowableChildren))
         {
             $max = $this->maximumChildren();
 
@@ -54,7 +54,7 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
             'Node "%s" cannot be added to "%s".  Valid child nodes: ["%s"].',
             $node->nodeName(),
             $this->nodeName(),
-            implode('", "', $this->getValidChildren())
+            implode('", "', $this->getAllowableChildren())
         ));
     }
 }

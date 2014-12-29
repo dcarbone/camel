@@ -14,7 +14,7 @@ interface IParentNode
     /**
      * @return array
      */
-    public function getValidChildren();
+    public function getAllowableChildren();
 
     /**
      * @param INode $node

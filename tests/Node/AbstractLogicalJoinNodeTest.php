@@ -13,16 +13,19 @@ class AbstractLogicalJoinNodeTest extends PHPUnit_Framework_TestCase
     {
         $orNode = new \DCarbone\Camel\Node\LogicalJoin\OrNode();
         $max = $orNode->maximumChildren();
+        $this->assertInternalType('integer', $max);
         $this->assertEquals(2, $max);
     }
 
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::minimumChildren
+     * @uses \DCarbone\Camel\Node\LogicalJoin\AndNode
      */
     public function testCanGetCorrectMinimumChildNumber()
     {
         $andNode = new \DCarbone\Camel\Node\LogicalJoin\AndNode();
         $min = $andNode->minimumChildren();
+        $this->assertInternalType('integer', $min);
         $this->assertEquals(2, $min);
     }
 
@@ -266,7 +269,6 @@ class AbstractLogicalJoinNodeTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\AbstractParentNode::append
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::maximumChildren
-     * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::eq
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\AbstractParentNode
      * @uses \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode
@@ -281,5 +283,16 @@ class AbstractLogicalJoinNodeTest extends PHPUnit_Framework_TestCase
         $andNode->eq();
         $andNode->eq();
     }
+
+    /**
+     * @covers \DCarbone\Camel\Node\AbstractNode::__toString
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::minimumChildren
+     * @uses \DCarbone\Camel\Node\LogicalJoin\OrNode
+     */
+    public function testCannotTypecastToStringWithOnlyOneChild()
+    {
+        $orNode = new \DCarbone\Camel\Node\LogicalJoin\OrNode();
+        $orNode->eq();
+        $this->assertEquals('', @(string)$orNode);
+    }
 }
- 

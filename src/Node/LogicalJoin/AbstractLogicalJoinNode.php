@@ -14,7 +14,7 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
      */
     public function __construct()
     {
-        $this->validParents = array(
+        $this->allowableParents = array(
             'And',
             'Expr1',
             'Expr2',
@@ -22,7 +22,7 @@ abstract class AbstractLogicalJoinNode extends AbstractParentNode
             'Where',
         );
 
-        $this->validChildren = array(
+        $this->allowableChildren = array(
             'And',
             'BeginsWith',
             'Contains',

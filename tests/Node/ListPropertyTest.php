@@ -36,7 +36,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableAttributes
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @depends testCanInitializeNode
@@ -44,7 +44,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetAttributeMap(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
-        $attributes = $listProperty->getValidAttributes();
+        $attributes = $listProperty->getAllowableAttributes();
 
         $this->assertInternalType('array', $attributes);
         $this->assertCount(10, $attributes);
@@ -61,7 +61,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\ListProperty
      * @depends testCanInitializeNode
@@ -69,7 +69,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidParents(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
-        $parents = $listProperty->getValidParents();
+        $parents = $listProperty->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(1, $parents);

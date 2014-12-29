@@ -11,10 +11,9 @@ class FieldRefTest extends PHPUnit_Framework_TestCase
      * @uses \DCarbone\Camel\Node\FieldRef
      * @return \DCarbone\Camel\Node\FieldRef
      */
-    public function testCanInitializeNode()
+    public function testCanInitializeFieldRefNode()
     {
         $fieldRef = new \DCarbone\Camel\Node\FieldRef();
-
         $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\FieldRef', $fieldRef);
 
         return $fieldRef;
@@ -23,28 +22,26 @@ class FieldRefTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DCarbone\Camel\Node\FieldRef::nodeName
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @depends testCanInitializeNode
+     * @depends testCanInitializeFieldRefNode
      * @param \DCarbone\Camel\Node\FieldRef $fieldRef
      */
-    public function testCanGetNodeName(\DCarbone\Camel\Node\FieldRef $fieldRef)
+    public function testCanGetFieldRefNodeName(\DCarbone\Camel\Node\FieldRef $fieldRef)
     {
         $name = $fieldRef->nodeName();
-
         $this->assertInternalType('string', $name);
-
         $this->assertEquals('FieldRef', $name);
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableAttributes
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @depends testCanInitializeNode
+     * @depends testCanInitializeFieldRefNode
      * @param \DCarbone\Camel\Node\FieldRef $fieldRef
      */
-    public function testCanGetValidAttributes(\DCarbone\Camel\Node\FieldRef $fieldRef)
+    public function testHasCorrectAllowableAttributes(\DCarbone\Camel\Node\FieldRef $fieldRef)
     {
-        $attributes = $fieldRef->getValidAttributes();
+        $attributes = $fieldRef->getAllowableAttributes();
 
         $this->assertInternalType('array', $attributes);
         $this->assertCount(15, $attributes);
@@ -66,15 +63,15 @@ class FieldRefTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\FieldRef
-     * @depends testCanInitializeNode
+     * @depends testCanInitializeFieldRefNode
      * @param \DCarbone\Camel\Node\FieldRef $fieldRef
      */
-    public function testCanGetValidParents(\DCarbone\Camel\Node\FieldRef $fieldRef)
+    public function testHasCorrectAllowableParents(\DCarbone\Camel\Node\FieldRef $fieldRef)
     {
-        $parents = $fieldRef->getValidParents();
+        $parents = $fieldRef->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(17, $parents);

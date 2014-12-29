@@ -13,7 +13,7 @@ class FieldRef extends AbstractNode
      */
     public function __construct()
     {
-        $this->validParents = array(
+        $this->allowableParents = array(
             'BeginsWith',
             'Contains',
             'DateRangesOverlap',
@@ -33,7 +33,7 @@ class FieldRef extends AbstractNode
             'OrderBy'
         );
 
-        $this->validAttributeMap = array(
+        $this->allowableAttributeMap = array(
             'alias' => 'Alias',
             'ascending' => 'Ascending',
             'createurl' => 'CreateURL',

@@ -13,9 +13,9 @@ class Today extends AbstractValueNode
      */
     public function __construct()
     {
-        $this->validParents = array('Value');
+        $this->allowableParents = array('Value');
 
-        $this->validAttributeMap = array(
+        $this->allowableAttributeMap = array(
             'offset' => 'Offset',
         );
     }

@@ -12,13 +12,13 @@ abstract class AbstractNode implements INode
     protected $parent;
 
     /** @var array */
-    protected $validParents = array();
+    protected $allowableParents = array();
 
     /** @var array */
     protected $outputAttributeMap = array();
 
     /** @var array */
-    protected $validAttributeMap = array();
+    protected $allowableAttributeMap = array();
 
     /**
      * @param INode|AbstractHump $parent
@@ -30,7 +30,7 @@ abstract class AbstractNode implements INode
         if (!($parent instanceof AbstractHump) && !($parent instanceof INode))
             throw new \InvalidArgumentException('Argument 1 expected to be instance of AbstractHump or INode.');
 
-        if (in_array($parent->nodeName(), $this->getValidParents(), true))
+        if (in_array($parent->nodeName(), $this->getAllowableParents(), true))
         {
             $this->parent = $parent;
             return $this;
@@ -40,24 +40,24 @@ abstract class AbstractNode implements INode
             'Node "%s" cannot be added to passed parent "%s".  Valid Parent Nodes: ["%s"].',
             $this->nodeName(),
             $parent->nodeName(),
-            implode('", "', $this->getValidParents())
+            implode('", "', $this->getAllowableParents())
         ));
     }
 
     /**
      * @return array
      */
-    public function getValidParents()
+    public function getAllowableParents()
     {
-        return $this->validParents;
+        return $this->allowableParents;
     }
 
     /**
      * @return array
      */
-    public function getValidAttributes()
+    public function getAllowableAttributes()
     {
-        return array_values($this->validAttributeMap);
+        return array_values($this->allowableAttributeMap);
     }
 
     /**
@@ -72,18 +72,18 @@ abstract class AbstractNode implements INode
             throw new \InvalidArgumentException('Argument 1 expected to be string, ' . gettype($name) . ' seen.');
 
         $name = strtolower(trim($name));
-        if ('' === $name || !isset($this->validAttributeMap[$name]))
+        if ('' === $name || !isset($this->allowableAttributeMap[$name]))
         {
             throw new \InvalidArgumentException(sprintf(
                 'Attribute "%s" does not match any known attribute for node "%s".' .
                 '  Available Attributes: ["%s"]',
                 $name,
                 $this->nodeName(),
-                implode('", "', $this->getValidAttributes())
+                implode('", "', $this->getAllowableAttributes())
             ));
         }
 
-        $this->outputAttributeMap[$this->validAttributeMap[$name]] = $value;
+        $this->outputAttributeMap[$this->allowableAttributeMap[$name]] = $value;
 
         return $this;
     }
@@ -120,11 +120,24 @@ abstract class AbstractNode implements INode
 
         if ($this instanceof IParentNode)
         {
+            /*
+             * I would much prefer to throw an exception here, however: https://bugs.php.net/bug.php?id=53648
+             *
+             * As a result, a warning is the best I can do currently.
+             */
+
             $min = $this->minimumChildren();
 
             if ($min > 0 && ($count = count($this->children())) < $min)
-                throw new \LogicException('Node "'.$this->nodeName().'" must have at least "'.
-                    $min.'" children, only "'.$count.'" seen.  Current node definition: "'.$xml.'"');
+            {
+                $msg = sprintf('Node "%s" must have at least "%d" children, only "%d" seen.  Current node definition: "%s"',
+                    $this->nodeName(),
+                    $min,
+                    $count,
+                    $xml);
+                trigger_error($msg, E_USER_NOTICE);
+                return '';
+            }
 
             foreach($this->children() as $node)
             {

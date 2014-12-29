@@ -36,7 +36,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableAttributes
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\Today
      * @depends testCanInitializeNode
@@ -44,7 +44,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidAttributes(\DCarbone\Camel\Node\ValueNode\Today $today)
     {
-        $attributes = $today->getValidAttributes();
+        $attributes = $today->getAllowableAttributes();
 
         $this->assertInternalType('array', $attributes);
         $this->assertCount(1, $attributes);
@@ -52,7 +52,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\Today
      * @depends testCanInitializeNode
@@ -60,7 +60,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidParents(\DCarbone\Camel\Node\ValueNode\Today $today)
     {
-        $parents = $today->getValidParents();
+        $parents = $today->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(1, $parents);

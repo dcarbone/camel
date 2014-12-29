@@ -15,8 +15,8 @@ class BeginsWith extends AbstractComparisonOperatorNode
     {
         parent::__construct();
 
-        $this->validParents[] = 'Expr1';
-        $this->validParents[] = 'Expr2';
+        $this->allowableParents[] = 'Expr1';
+        $this->allowableParents[] = 'Expr2';
     }
 
     /**

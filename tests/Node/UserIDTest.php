@@ -35,7 +35,7 @@ class UserIDTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\UserID
      * @depends testCanInitializeNode
@@ -43,7 +43,7 @@ class UserIDTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidParents(\DCarbone\Camel\Node\ValueNode\UserID $userID)
     {
-        $parents = $userID->getValidParents();
+        $parents = $userID->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(1, $parents);

@@ -57,7 +57,7 @@ class GroupByTest extends PHPUnit_Framework_TestCase
      * @covers \DCarbone\Camel\Node\FieldRef::__construct
      * @covers \DCarbone\Camel\Node\FieldRef::nodeName
      * @covers \DCarbone\Camel\Node\AbstractNode::setParent
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @covers \DCarbone\Camel\Node\AbstractNode::attribute
      * @uses \DCarbone\Camel\Hump\GroupBy
      * @uses \DCarbone\Camel\Hump\AbstractSimpleHump

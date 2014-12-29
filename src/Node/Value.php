@@ -21,7 +21,7 @@ class Value extends AbstractParentNode implements IValueNode
      */
     public function __construct()
     {
-        $this->validChildren = array(
+        $this->allowableChildren = array(
             'ListProperty',
             'Month',
             'Now',
@@ -30,7 +30,7 @@ class Value extends AbstractParentNode implements IValueNode
             'XML',
         );
 
-        $this->validParents = array(
+        $this->allowableParents = array(
             'BeginsWith',
             'Contains',
             'DateRangesOverlap',
@@ -46,7 +46,7 @@ class Value extends AbstractParentNode implements IValueNode
             'Values',
         );
 
-        $this->validAttributeMap = array(
+        $this->allowableAttributeMap = array(
             'type' => 'Type',
             'includetimevalue' => 'IncludeTimeValue',
         );

@@ -36,7 +36,7 @@ class MonthTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\ValueNode\Month
      * @depends testCanInitializeNode
@@ -44,7 +44,7 @@ class MonthTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidParents(\DCarbone\Camel\Node\ValueNode\Month $month)
     {
-        $parents = $month->getValidParents();
+        $parents = $month->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(1, $parents);

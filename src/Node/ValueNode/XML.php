@@ -13,7 +13,7 @@ class XML extends AbstractValueNode
      */
     public function __construct()
     {
-        $this->validParents = array(
+        $this->allowableParents = array(
             'BeginsWith',
             'Contains',
             'DateRangesOverlap',

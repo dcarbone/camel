@@ -13,7 +13,7 @@ class ListProperty extends AbstractValueNode
      */
     public function __construct()
     {
-        $this->validAttributeMap = array(
+        $this->allowableAttributeMap = array(
             'autohyperlink' => 'AutoHyperLink',
             'autohyperlinknoencoding' => 'AutoHyperLinkNoEncoding',
             'autonewline' => 'AutoNewLine',
@@ -26,7 +26,7 @@ class ListProperty extends AbstractValueNode
             'urlencodeasurl' => 'URLEncodeAsURL',
         );
 
-        $this->validParents = array('Value');
+        $this->allowableParents = array('Value');
     }
 
     /**

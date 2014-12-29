@@ -20,12 +20,12 @@ interface INode
     /**
      * @return array
      */
-    public function getValidParents();
+    public function getAllowableParents();
 
     /**
      * @return array
      */
-    public function getValidAttributes();
+    public function getAllowableAttributes();
 
     /**
      * @param $name

@@ -16,13 +16,13 @@ abstract class AbstractComparisonOperatorNode extends AbstractParentNode
      */
     public function __construct()
     {
-        $this->validParents = array(
+        $this->allowableParents = array(
             'And',
             'Or',
             'Where',
         );
 
-        $this->validChildren = array(
+        $this->allowableChildren = array(
             'FieldRef',
             'Value',
             'XML',

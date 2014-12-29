@@ -13,7 +13,7 @@ class UserID extends AbstractValueNode
      */
     public function __construct()
     {
-        $this->validParents = array('Value');
+        $this->allowableParents = array('Value');
     }
 
     /**

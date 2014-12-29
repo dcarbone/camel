@@ -53,7 +53,7 @@ class ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidParents
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableParents
      * @uses \DCarbone\Camel\Node\Value
      * @uses \DCarbone\Camel\Node\AbstractNode
      * @uses \DCarbone\Camel\Node\AbstractParentNode
@@ -62,7 +62,7 @@ class ValueTest extends PHPUnit_Framework_TestCase
      */
     public function testCanGetValidParents(\DCarbone\Camel\Node\Value $value)
     {
-        $parents = $value->getValidParents();
+        $parents = $value->getAllowableParents();
 
         $this->assertInternalType('array', $parents);
         $this->assertCount(13, $parents);
@@ -82,14 +82,14 @@ class ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractNode::getValidAttributes
+     * @covers \DCarbone\Camel\Node\AbstractNode::getAllowableAttributes
      * @uses \DCarbone\Camel\Node\Value
      * @depends testCanInitializeNode
      * @param \DCarbone\Camel\Node\Value $value
      */
     public function testCanGetValidAttributes(\DCarbone\Camel\Node\Value $value)
     {
-        $attributes = $value->getValidAttributes();
+        $attributes = $value->getAllowableAttributes();
 
         $this->assertInternalType('array', $attributes);
         $this->assertCount(2, $attributes);
@@ -98,14 +98,14 @@ class ValueTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Node\AbstractParentNode::getValidChildren
+     * @covers \DCarbone\Camel\Node\AbstractParentNode::getAllowableChildren
      * @uses \DCarbone\Camel\Node\Value
      * @depends testCanInitializeNode
      * @param \DCarbone\Camel\Node\Value $value
      */
     public function testCanGetValidChildren(\DCarbone\Camel\Node\Value $value)
     {
-        $children = $value->getValidChildren();
+        $children = $value->getAllowableChildren();
 
         $this->assertInternalType('array', $children);
         $this->assertCount(6, $children);
