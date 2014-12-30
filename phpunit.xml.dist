@@ -12,8 +12,28 @@
         syntaxCheck="true"
         >
 
-    <testsuite name="Node">
-        <directory>./tests/Node</directory>
+    <testsuite name="AbstractNodeTests">
+        <directory>./tests/Node/AbstractNodeTests</directory>
+        <exclude>./tests/misc</exclude>
+    </testsuite>
+
+    <testsuite name="ComparisonOperatorNodeTests">
+        <directory>./tests/Node/ComparisonOperatorNodeTests</directory>
+        <exclude>./tests/misc</exclude>
+    </testsuite>
+
+    <testsuite name="DiscreteNodeTests">
+        <directory>./tests/Node/DiscreteNodeTests</directory>
+        <exclude>./tests/misc</exclude>
+    </testsuite>
+
+    <testsuite name="LogicalJoinNodeTests">
+        <directory>./tests/Node/LogicalJoinNodeTests</directory>
+        <exclude>./tests/misc</exclude>
+    </testsuite>
+
+    <testsuite name="ValueNodeTests">
+        <directory>./tests/Node/ValueNodeTests</directory>
         <exclude>./tests/misc</exclude>
     </testsuite>
 
