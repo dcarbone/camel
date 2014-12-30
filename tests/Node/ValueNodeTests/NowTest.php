@@ -13,9 +13,7 @@ class NowTest extends PHPUnit_Framework_TestCase
     public function testCanInitializeNode()
     {
         $now = new \DCarbone\Camel\Node\ValueNode\Now();
-
         $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Now', $now);
-
         return $now;
     }
 
@@ -29,7 +27,6 @@ class NowTest extends PHPUnit_Framework_TestCase
     public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\Now $now)
     {
         $name = $now->nodeName();
-
         $this->assertInternalType('string', $name);
         $this->assertEquals('Now', $name);
     }

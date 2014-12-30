@@ -18,7 +18,7 @@ abstract class AbstractSimpleHump extends AbstractHump
      */
     public function append(INode $node)
     {
-        if (in_array($node->nodeName(), $this->validChildren))
+        if (in_array($node->nodeName(), $this->allowableChildren))
         {
             $node->setParent($this);
             $this->children[] = $node;
@@ -27,10 +27,10 @@ abstract class AbstractSimpleHump extends AbstractHump
         }
 
         throw new \InvalidArgumentException(sprintf(
-            'Node "%s" cannot be added to "%s".  Valid child nodes: ["%s"].',
+            'Node "%s" cannot be added to "%s".  Allowable child nodes: ["%s"].',
             $node->nodeName(),
             $this->nodeName(),
-            implode('", "', $this->getValidChildren())
+            implode('", "', $this->getAllowableChildren())
         ));
     }
 }

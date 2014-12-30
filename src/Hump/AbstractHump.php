@@ -12,7 +12,7 @@ abstract class AbstractHump
     protected $camel;
 
     /** @var array */
-    protected $validChildren = array();
+    protected $allowableChildren = array();
 
     /**
      * @param Camel $camel
@@ -28,9 +28,9 @@ abstract class AbstractHump
     /**
      * @return array
      */
-    public function getValidChildren()
+    public function getAllowableChildren()
     {
-        return $this->validChildren;
+        return $this->allowableChildren;
     }
 
     /**

@@ -21,7 +21,7 @@ class OrderBy extends AbstractSimpleHump
      */
     public function __construct()
     {
-        $this->validChildren = array('FieldRef');
+        $this->allowableChildren = array('FieldRef');
     }
 
     /**

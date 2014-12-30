@@ -14,9 +14,7 @@ class UserIDTest extends PHPUnit_Framework_TestCase
     public function testCanInitializeNode()
     {
         $userID = new \DCarbone\Camel\Node\ValueNode\UserID();
-
         $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\UserID', $userID);
-
         return $userID;
     }
 
@@ -29,7 +27,6 @@ class UserIDTest extends PHPUnit_Framework_TestCase
     public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\UserID $userID)
     {
         $name = $userID->nodeName();
-
         $this->assertInternalType('string', $name);
         $this->assertEquals('UserID', $name);
     }
@@ -60,11 +57,8 @@ class UserIDTest extends PHPUnit_Framework_TestCase
     public function testCanSetNodeTextValue(\DCarbone\Camel\Node\ValueNode\UserID $userID)
     {
         $ret = $userID->nodeValue('TestValue');
-
         $this->assertSame($userID, $ret);
-
         $textValue = $userID->getNodeValue();
-
         $this->assertInternalType('string', $textValue);
         $this->assertEquals('TestValue', $textValue);
     }

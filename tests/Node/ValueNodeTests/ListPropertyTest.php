@@ -14,9 +14,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     public function testCanInitializeNode()
     {
         $listProperty = new \DCarbone\Camel\Node\ValueNode\ListProperty();
-
         $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\ListProperty', $listProperty);
-
         return $listProperty;
     }
 
@@ -29,9 +27,7 @@ class ListPropertyTest extends PHPUnit_Framework_TestCase
     public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\ListProperty $listProperty)
     {
         $name = $listProperty->nodeName();
-
         $this->assertInternalType('string', $name);
-
         $this->assertEquals('ListProperty', $name);
     }
 

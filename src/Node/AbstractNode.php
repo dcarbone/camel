@@ -37,7 +37,7 @@ abstract class AbstractNode implements INode
         }
 
         throw new \InvalidArgumentException(sprintf(
-            'Node "%s" cannot be added to passed parent "%s".  Valid Parent Nodes: ["%s"].',
+            'Node "%s" cannot be added to passed parent "%s".  Allowable Parent Nodes: ["%s"].',
             $this->nodeName(),
             $parent->nodeName(),
             implode('", "', $this->getAllowableParents())

@@ -39,14 +39,14 @@ class WhereTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \DCarbone\Camel\Hump\Where::getValidChildren
+     * @covers \DCarbone\Camel\Hump\Where::getAllowableChildren
      * @uses \DCarbone\Camel\Hump\Where
      * @depends testCanGetWhereInstance
      * @param \DCarbone\Camel\Hump\Where $where
      */
     public function testCanGetValidChildrenArray(\DCarbone\Camel\Hump\Where $where)
     {
-        $children = $where->getValidChildren();
+        $children = $where->getAllowableChildren();
 
         $this->assertInternalType('array', $children);
         $this->assertCount(17, $children);

@@ -14,9 +14,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
     public function testCanInitializeNode()
     {
         $today = new \DCarbone\Camel\Node\ValueNode\Today();
-
         $this->assertInstanceOf('\\DCarbone\\Camel\\Node\\ValueNode\\Today', $today);
-
         return $today;
     }
 
@@ -29,9 +27,7 @@ class TodayTest extends PHPUnit_Framework_TestCase
     public function testCanGetNodeName(\DCarbone\Camel\Node\ValueNode\Today $today)
     {
         $name = $today->nodeName();
-
         $this->assertInternalType('string', $name);
-
         $this->assertEquals('Today', $name);
     }
 

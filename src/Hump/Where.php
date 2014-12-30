@@ -21,7 +21,7 @@ class Where extends AbstractHump
      */
     public function __construct()
     {
-        $this->validChildren = array(
+        $this->allowableChildren = array(
             'or'                => 'Or',
             'and'               => 'And',
             'beginswith'        => 'BeginsWith',
@@ -79,9 +79,9 @@ class Where extends AbstractHump
 
         $nodeName = strtolower(trim($nodeName));
 
-        if (isset($this->validChildren[$nodeName]))
+        if (isset($this->allowableChildren[$nodeName]))
         {
-            $class = $this->nodeClassMap[$this->validChildren[$nodeName]];
+            $class = $this->nodeClassMap[$this->allowableChildren[$nodeName]];
 
             $this->rootNode = new $class;
             $this->rootNode->setParent($this);
@@ -231,9 +231,9 @@ class Where extends AbstractHump
     /**
      * @return array
      */
-    public function getValidChildren()
+    public function getAllowableChildren()
     {
-        return array_values($this->validChildren);
+        return array_values($this->allowableChildren);
     }
 
     /**

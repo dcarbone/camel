@@ -51,7 +51,7 @@ abstract class AbstractParentNode extends AbstractNode implements IParentNode
         }
 
         throw new \InvalidArgumentException(sprintf(
-            'Node "%s" cannot be added to "%s".  Valid child nodes: ["%s"].',
+            'Node "%s" cannot be added to "%s".  Allowable child nodes: ["%s"].',
             $node->nodeName(),
             $this->nodeName(),
             implode('", "', $this->getAllowableChildren())
