@@ -71,7 +71,7 @@ There are only two of these:
 
 To keep things DRY, I have most of the logic necessary for these nodes in their base class:
 
-- [AbstractLogicalJoinNode](https://github.com/dcarbone/camel/tree/master/src/Node/AbstractLogicalJoinNode.php)
+- [AbstractLogicalJoinNode](https://github.com/dcarbone/camel/blob/master/src/Node/LogicalJoin/AbstractLogicalJoinNode.php)
 
 ### ValueNode
 
