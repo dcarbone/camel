@@ -88,7 +88,6 @@ Lets say you have a SharePoint list that looks somewhat like this:
 | Title | Age | Gender | Profession |
 | ----- | --- | ------ | ---------- |
 | Daniel | 28 | Male | Software Developer |
-| Krystal | 29 | Female | Genetics Researcher |
 | Elizabeth | 25 | Female | Project Manager |
 | David | 59 | Male | Oncologist |
 | Beatrice | 22 | Female | Med Student |
@@ -129,7 +128,7 @@ $camel->where()
         ->end()
         ->eq()
             ->fieldRef()->attribute('name', 'Title')->end()
-            ->value()->attribute('type', 'Text')->nodeValue('Krystal')->end();
+            ->value()->attribute('type', 'Text')->nodeValue('David')->end();
 ```
 
 The above will produce:
@@ -144,7 +143,7 @@ The above will produce:
       </Eq>
       <Eq>
         <FieldRef Name="Title" />
-        <Value Type="Text">Krystal</Value>
+        <Value Type="Text">David</Value>
       </Eq>
     </Or>
   </Where>
