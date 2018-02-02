@@ -3,7 +3,7 @@
 /**
  * Class TodayTest
  */
-class TodayTest extends PHPUnit_Framework_TestCase
+class TodayTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ValueNode\Today::__construct

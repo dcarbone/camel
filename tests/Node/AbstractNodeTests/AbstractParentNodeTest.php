@@ -3,7 +3,7 @@
 /**
  * Class AbstractParentNodeTest
  */
-class AbstractParentNodeTest extends PHPUnit_Framework_TestCase
+class AbstractParentNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @uses \DCarbone\Camel\Node\Value
@@ -39,6 +39,9 @@ class AbstractParentNodeTest extends PHPUnit_Framework_TestCase
         $value = new \DCarbone\Camel\Node\Value();
         $xml = new \DCarbone\Camel\Node\ValueNode\XML();
         $value->append($xml);
+
+        $this->assertCount(1, $value->children());
+
         return $value;
     }
 

@@ -3,7 +3,7 @@
 /**
  * Class ValueTest
  */
-class ValueTest extends PHPUnit_Framework_TestCase
+class ValueTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\Value::__construct

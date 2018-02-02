@@ -3,7 +3,7 @@
 /**
  * Class CamelTest
  */
-class CamelTest extends PHPUnit_Framework_TestCase
+class CamelTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @uses \DCarbone\Camel\Camel

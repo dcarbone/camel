@@ -3,7 +3,7 @@
 /**
  * Class UserIDTest
  */
-class UserIDTest extends PHPUnit_Framework_TestCase
+class UserIDTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ValueNode\UserID::__construct

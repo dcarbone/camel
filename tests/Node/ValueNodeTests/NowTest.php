@@ -3,7 +3,7 @@
 /**
  * Class NowTest
  */
-class NowTest extends PHPUnit_Framework_TestCase
+class NowTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @uses \DCarbone\Camel\Node\AbstractNode

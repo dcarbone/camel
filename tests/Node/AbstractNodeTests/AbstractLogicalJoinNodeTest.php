@@ -3,7 +3,7 @@
 /**
  * Class AbstractLogicalJoinNodeTest
  */
-class AbstractLogicalJoinNodeTest extends PHPUnit_Framework_TestCase
+class AbstractLogicalJoinNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::maximumChildren

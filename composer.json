@@ -1,8 +1,9 @@
 {
     "name" : "dcarbone/camel",
     "description" : "A library designed to help facilitate SharePoint CAML query construction",
+    "license": "MPL-2.0",
     "type" : "library",
-
+    "homepage": "https://github.com/dcarbone/camel",
     "keywords": [
         "php",
         "sharepoint",
@@ -10,27 +11,24 @@
         "caml",
         "CAML"
     ],
-    "homepage": "https://github.com/dcarbone/camel",
-    "license": "GPLv2",
-
     "authors" : [
         {
             "name" : "Daniel Carbone",
             "email" : "daniel.p.carbone@gmail.com"
         }
     ],
-
     "require" : {
-        "php" : ">=5.3.3"
+        "php" : ">=5.4"
     },
-
-    "require-dev": {
-        "phpunit/phpunit": "~4.1"
-    },
-
-    "require-dependencies" : true,
-
     "autoload" : {
+        "psr-4" : {
+            "DCarbone\\Camel\\" : "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
+    "autoload-dev" : {
         "psr-4" : {
             "DCarbone\\Camel\\" : "src/"
         }

@@ -3,7 +3,7 @@
 /**
  * Class MembershipTest
  */
-class MembershipTest extends PHPUnit_Framework_TestCase
+class MembershipTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

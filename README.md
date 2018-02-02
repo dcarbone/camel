@@ -10,7 +10,7 @@ A library designed to help facilitate SharePoint CAML query construction
 
 ```json
 "require" : {
-    "dcarbone/camel" : "0.5.*"
+    "dcarbone/camel" : "@stable"
 },
 ```
 

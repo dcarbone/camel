@@ -3,7 +3,7 @@
 /**
  * Class GeqTest
  */
-class GeqTest extends PHPUnit_Framework_TestCase
+class GeqTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct
