@@ -3,7 +3,7 @@
 /**
  * Class LtTest
  */
-class LtTest extends PHPUnit_Framework_TestCase
+class LtTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

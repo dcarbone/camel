@@ -24,7 +24,7 @@ abstract class AbstractValueNode extends AbstractNode implements IValueNode
     }
 
     /**
-     * @return $this
+     * @return string
      */
     public function getNodeValue()
     {

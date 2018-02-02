@@ -3,7 +3,7 @@
 /**
  * Class MonthTest
  */
-class MonthTest extends PHPUnit_Framework_TestCase
+class MonthTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ValueNode\Month::__construct

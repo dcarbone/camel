@@ -3,7 +3,7 @@
 /**
  * Class OrNodeTest
  */
-class OrNodeTest extends PHPUnit_Framework_TestCase
+class OrNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::__construct

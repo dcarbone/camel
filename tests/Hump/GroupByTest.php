@@ -3,7 +3,7 @@
 /**
  * Class GroupByTest
  */
-class GroupByTest extends PHPUnit_Framework_TestCase
+class GroupByTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Camel::orderBy

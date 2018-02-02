@@ -3,7 +3,7 @@
 /**
  * Class AbstractNodeTest
  */
-class AbstractNodeTest extends PHPUnit_Framework_TestCase
+class AbstractNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @uses   \DCarbone\Camel\Node\FieldRef
@@ -52,6 +52,8 @@ class AbstractNodeTest extends PHPUnit_Framework_TestCase
         $eq = new \DCarbone\Camel\Node\ComparisonOperator\Eq();
         $fieldRef = new \DCarbone\Camel\Node\FieldRef();
         $eq->append($fieldRef);
+
+        $this->assertCount(1, $eq->children());
 
         return $fieldRef;
     }

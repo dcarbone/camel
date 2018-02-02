@@ -3,7 +3,7 @@
 /**
  * Class IsNullTest
  */
-class IsNullTest extends PHPUnit_Framework_TestCase
+class IsNullTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

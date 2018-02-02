@@ -3,7 +3,7 @@
 /**
  * Class WhereTest
  */
-class WhereTest extends PHPUnit_Framework_TestCase
+class WhereTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Camel::where
@@ -105,7 +105,7 @@ class WhereTest extends PHPUnit_Framework_TestCase
      */
     public function testExceptionThrownWhenSettingAdditionalRootNodes(\DCarbone\Camel\Hump\Where $where)
     {
-        $neq = $where->root('neq');
+        $where->root('neq');
     }
 
     /**
@@ -120,7 +120,7 @@ class WhereTest extends PHPUnit_Framework_TestCase
 
         $where = $camel->where();
 
-        $asdf = $where->root('asdf');
+        $where->root('asdf');
     }
 
     /**

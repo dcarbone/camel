@@ -3,7 +3,7 @@
 /**
  * Class EqTest
  */
-class EqTest extends PHPUnit_Framework_TestCase
+class EqTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

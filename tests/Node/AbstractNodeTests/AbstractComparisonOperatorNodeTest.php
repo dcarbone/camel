@@ -3,7 +3,7 @@
 /**
  * Class AbstractComparisonOperatorNodeTest
  */
-class AbstractComparisonOperatorNodeTest extends PHPUnit_Framework_TestCase
+class AbstractComparisonOperatorNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

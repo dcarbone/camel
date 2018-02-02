@@ -3,7 +3,7 @@
 /**
  * Class ListPropertyTest
  */
-class ListPropertyTest extends PHPUnit_Framework_TestCase
+class ListPropertyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ValueNode\ListProperty::__construct

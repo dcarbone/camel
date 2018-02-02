@@ -3,7 +3,7 @@
 /**
  * Class NotIncludesTest
  */
-class NotIncludesTest extends PHPUnit_Framework_TestCase
+class NotIncludesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\ComparisonOperator\AbstractComparisonOperatorNode::__construct

@@ -3,7 +3,7 @@
 /**
  * Class AndNodeTest
  */
-class AndNodeTest extends PHPUnit_Framework_TestCase
+class AndNodeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \DCarbone\Camel\Node\LogicalJoin\AbstractLogicalJoinNode::__construct
